@@ -1,4 +1,4 @@
-package com.testevr.testejava.cliente.valueobject;
+package com.testevr.testejava.cliente.domain.valueobject;
 
 import java.util.Objects;
 
@@ -15,7 +15,7 @@ public class NomeFantasia {
         this.valor = valor != null ? valor.trim() : null;
     }
 
-    public String getValor() {
+    public String getValue() {
         return valor;
     }
 

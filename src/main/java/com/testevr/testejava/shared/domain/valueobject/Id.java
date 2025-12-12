@@ -1,4 +1,4 @@
-package com.testevr.testejava.shared.valueobject;
+package com.testevr.testejava.shared.domain.valueobject;
 
 import java.util.Objects;
 
@@ -15,7 +15,7 @@ public class Id {
         this.valor = valor;
     }
 
-    public Long getValor() {
+    public Long getValue() {
         return valor;
     }
 

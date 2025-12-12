@@ -1,4 +1,4 @@
-package com.testevr.testejava.cliente.valueobject;
+package com.testevr.testejava.cliente.domain.valueobject;
 
 import java.util.Objects;
 import java.util.regex.Pattern;
@@ -25,7 +25,7 @@ public class Cnpj {
         this.valor = cnpjLimpo;
     }
 
-    public String getValor() {
+    public String getValue() {
         return valor;
     }
 

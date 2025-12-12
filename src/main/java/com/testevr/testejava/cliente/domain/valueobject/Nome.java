@@ -1,4 +1,4 @@
-package com.testevr.testejava.cliente.valueobject;
+package com.testevr.testejava.cliente.domain.valueobject;
 
 import java.util.Objects;
 
@@ -18,7 +18,7 @@ public class Nome {
         this.valor = valor.trim();
     }
 
-    public String getValor() {
+    public String getValue() {
         return valor;
     }
 
