@@ -22,20 +22,18 @@ public class VendaService {
     }
 
     @Transactional
-    public Venda create(Venda venda) {
+    public Venda create(Venda venda) throws Exception {
+        // 1. Verificar se há estoque suficiente
+        boolean estoqueDisponivel = produtoService.verificarEstoqueDisponivel(
+                venda.getProdutoId(),
+                venda.getQuantidade()
+        );
+
+        if (!estoqueDisponivel) {
+            throw new RuntimeException("Estoque insuficiente para o produto ID: " + venda.getProdutoId());
+        }
+
         try {
-            // 1. Verificar se há estoque suficiente
-            boolean estoqueDisponivel = produtoService.verificarEstoqueDisponivel(
-                    venda.getProdutoId(),
-                    venda.getQuantidade()
-            );
-
-            if (!estoqueDisponivel) {
-                // Criar venda com status ERRO se não há estoque
-                Venda vendaComErro = venda.atualizarStatus(StatusVenda.ERRO);
-                return this.repository.create(vendaComErro);
-            }
-
             // 2. Realizar baixa no estoque
             BaixaEstoqueResponse response = produtoService.realizarBaixaEstoque(
                     venda.getProdutoId(),
@@ -43,24 +41,16 @@ public class VendaService {
             );
 
             // 3. Verificar se a baixa foi bem-sucedida
-            if (response.getMessage() != null && response.getMessage().contains("sucesso")) {
-                // Sucesso: criar venda com status SUCESSO
-                Venda vendaComSucesso = venda.atualizarStatus(StatusVenda.SUCESSO);
-                return this.repository.create(vendaComSucesso);
-            } else {
-                // Erro na baixa: criar venda com status ERRO
-                Venda vendaComErro = venda.atualizarStatus(StatusVenda.ERRO);
-                return this.repository.create(vendaComErro);
+            if (response.getMessage() == null || !response.getMessage().contains("sucesso")) {
+                throw new RuntimeException("Falha na baixa do estoque para o produto ID: " + venda.getProdutoId());
             }
 
+            // Sucesso: criar venda com status SUCESSO
+            Venda vendaComSucesso = venda.atualizarStatus(StatusVenda.SUCESSO);
+            return this.repository.create(vendaComSucesso);
+
         } catch (IOException e) {
-            // Erro de comunicação: criar venda com status ERRO
-            Venda vendaComErro = venda.atualizarStatus(StatusVenda.ERRO);
-            return this.repository.create(vendaComErro);
-        } catch (RuntimeException e) {
-            // Outros erros: criar venda com status ERRO
-            Venda vendaComErro = venda.atualizarStatus(StatusVenda.ERRO);
-            return this.repository.create(vendaComErro);
+            throw new RuntimeException("Erro de comunicação ao realizar baixa no estoque: " + e.getMessage(), e);
         }
     }
 
@@ -103,12 +93,6 @@ public class VendaService {
         }
 
         try {
-            // Se a venda tinha status SUCESSO, tentar restaurar o estoque
-            if (venda.getStatus() == StatusVenda.SUCESSO) {
-                // Aqui você implementaria a lógica de restauração de estoque
-                // Por enquanto, vamos apenas marcar como cancelada
-                // TODO: Implementar método de restauração no ProdutoService se necessário
-            }
 
             Venda vendaCancelada = venda.atualizarStatus(StatusVenda.CANCELADA);
             return this.repository.update(vendaCancelada);
