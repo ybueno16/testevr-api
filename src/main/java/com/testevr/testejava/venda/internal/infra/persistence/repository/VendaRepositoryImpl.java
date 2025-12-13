@@ -4,6 +4,7 @@ import com.testevr.testejava.venda.internal.domain.entity.Venda;
 import com.testevr.testejava.venda.internal.domain.repository.VendaRepository;
 import com.testevr.testejava.venda.internal.domain.valueobject.StatusVenda;
 import com.testevr.testejava.venda.internal.domain.valueobject.ValorVenda;
+import com.testevr.testejava.venda.internal.application.dto.VendaConsolidadaDto;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
@@ -165,6 +166,66 @@ public class VendaRepositoryImpl implements VendaRepository {
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao deletar venda", e);
         }
+    }
+
+    @Override
+    public List<VendaConsolidadaDto> buscarVendasConsolidadas() {
+        String sql = "SELECT cliente_id, status, SUM(valor * quantidade) as valor_total, COUNT(*) as quantidade_vendas " +
+                     "FROM venda " +
+                     "GROUP BY cliente_id, status " +
+                     "ORDER BY cliente_id, status";
+        
+        List<VendaConsolidadaDto> vendas = new ArrayList<>();
+
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                Long clienteId = rs.getLong("cliente_id");
+                String status = rs.getString("status");
+                java.math.BigDecimal valorTotal = rs.getBigDecimal("valor_total");
+                Integer quantidadeVendas = rs.getInt("quantidade_vendas");
+
+                vendas.add(new VendaConsolidadaDto(clienteId, status, valorTotal, quantidadeVendas));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao buscar vendas consolidadas", e);
+        }
+
+        return vendas;
+    }
+
+    @Override
+    public List<VendaConsolidadaDto> buscarVendasConsolidadasPorCliente(Long clienteId) {
+        String sql = "SELECT cliente_id, status, SUM(valor * quantidade) as valor_total, COUNT(*) as quantidade_vendas " +
+                     "FROM venda " +
+                     "WHERE cliente_id = ? " +
+                     "GROUP BY cliente_id, status " +
+                     "ORDER BY status";
+        
+        List<VendaConsolidadaDto> vendas = new ArrayList<>();
+
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setLong(1, clienteId);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    Long clienteIdResult = rs.getLong("cliente_id");
+                    String status = rs.getString("status");
+                    java.math.BigDecimal valorTotal = rs.getBigDecimal("valor_total");
+                    Integer quantidadeVendas = rs.getInt("quantidade_vendas");
+
+                    vendas.add(new VendaConsolidadaDto(clienteIdResult, status, valorTotal, quantidadeVendas));
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao buscar vendas consolidadas por cliente", e);
+        }
+
+        return vendas;
     }
 
     private Venda mapRowToVenda(ResultSet rs) throws SQLException {

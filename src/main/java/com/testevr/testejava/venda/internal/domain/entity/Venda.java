@@ -57,6 +57,11 @@ public class Venda {
                         this.quantidade, novoStatus, this.createdAt, LocalDateTime.now());
     }
 
+    public Venda atualizarId(Id novoId) {
+        return new Venda(novoId.getValue(), this.clienteId, this.produtoId, this.valor,
+                        this.quantidade, this.status, this.createdAt, this.updatedAt);
+    }
+
     public Id getId() {
         return id;
     }

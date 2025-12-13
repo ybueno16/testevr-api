@@ -20,7 +20,7 @@ public class Cliente {
     private final LocalDateTime updatedAt;
 
     public Cliente(Long id, Nome nome, RazaoSocial razaoSocial, NomeFantasia nomeFantasia, Cnpj cnpj) {
-        this.id = new Id(id);
+        this.id = id != null ? new Id(id) : null;
         this.nome = nome;
         this.razaoSocial = razaoSocial;
         this.nomeFantasia = nomeFantasia;
@@ -31,7 +31,7 @@ public class Cliente {
     }
 
     public Cliente(Long id, Nome nome, RazaoSocial razaoSocial, NomeFantasia nomeFantasia, Cnpj cnpj, boolean ativo) {
-        this.id = new Id(id);
+        this.id = id != null ? new Id(id) : null;
         this.nome = nome;
         this.razaoSocial = razaoSocial;
         this.nomeFantasia = nomeFantasia;
@@ -43,7 +43,7 @@ public class Cliente {
 
     public Cliente(Long id, Nome nome, RazaoSocial razaoSocial, NomeFantasia nomeFantasia, Cnpj cnpj, boolean ativo,
                    LocalDateTime createdAt, LocalDateTime updatedAt) {
-        this.id = new Id(id);
+        this.id = id != null ? new Id(id) : null;
         this.nome = nome;
         this.razaoSocial = razaoSocial;
         this.nomeFantasia = nomeFantasia;
@@ -83,6 +83,11 @@ public class Cliente {
 
     public LocalDateTime getUpdatedAt() {
         return updatedAt;
+    }
+
+    public Cliente atualizarId(Long novoId) {
+        return new Cliente(novoId, this.nome, this.razaoSocial, this.nomeFantasia, 
+                          this.cnpj, this.ativo, this.createdAt, this.updatedAt);
     }
 
     @Override

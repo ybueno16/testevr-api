@@ -18,23 +18,35 @@ public class ClienteMapper {
     public Cliente toEntity(ClienteDto dto) {
         if (dto == null) return null;
 
-        return new Cliente(
-                dto.getId(),
-                new Nome(dto.getNome()),
-                new RazaoSocial(dto.getRazaoSocial()),
-                new NomeFantasia(dto.getNomeFantasia()),
-                new Cnpj(dto.getCnpj()),
-                dto.getAtivo() != null ? dto.getAtivo() : true,
-                dto.getCreatedAt() != null ? dto.getCreatedAt() : LocalDateTime.now(),
-                dto.getUpdatedAt() != null ? dto.getUpdatedAt() : LocalDateTime.now()
-        );
+        if (dto.getId() != null) {
+            // Atualização - com ID
+            return new Cliente(
+                    dto.getId(),
+                    new Nome(dto.getNome()),
+                    new RazaoSocial(dto.getRazaoSocial()),
+                    new NomeFantasia(dto.getNomeFantasia()),
+                    new Cnpj(dto.getCnpj()),
+                    dto.getAtivo() != null ? dto.getAtivo() : true,
+                    dto.getCreatedAt() != null ? dto.getCreatedAt() : LocalDateTime.now(),
+                    dto.getUpdatedAt() != null ? dto.getUpdatedAt() : LocalDateTime.now()
+            );
+        } else {
+            // Criação - sem ID
+            return new Cliente(
+                    null,
+                    new Nome(dto.getNome()),
+                    new RazaoSocial(dto.getRazaoSocial()),
+                    new NomeFantasia(dto.getNomeFantasia()),
+                    new Cnpj(dto.getCnpj())
+            );
+        }
     }
 
     public ClienteDto toDto(Cliente entity) {
         if (entity == null) return null;
 
         return new ClienteDto(
-                entity.getId().getValue(),
+                entity.getId() != null ? entity.getId().getValue() : null,
                 entity.getNome().getValue(),
                 entity.getRazaoSocial().getValue(),
                 entity.getNomeFantasia().getValue(),

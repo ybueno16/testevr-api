@@ -4,6 +4,8 @@ import com.testevr.testejava.cliente.domain.entity.Cliente;
 import com.testevr.testejava.cliente.domain.repository.ClienteRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ClienteService {
     private final ClienteRepository repository;
@@ -24,7 +26,7 @@ public class ClienteService {
         return this.repository.findById(id);
     }
 
-    public Cliente findAll() {
+    public List<Cliente> findAll() {
         return this.repository.findAll();
     }
 

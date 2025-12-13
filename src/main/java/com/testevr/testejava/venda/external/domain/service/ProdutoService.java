@@ -56,7 +56,7 @@ public class ProdutoService {
      * Busca produto por ID (já implementado anteriormente)
      */
     public ProdutoDto buscarProdutoPorId(Long id) throws IOException {
-        String urlString = apiExternaUrl + "produtos/" + id;
+        String urlString = apiExternaUrl + "/produtos/" + id;
 
         HttpURLConnection connection = null;
         try {
@@ -109,7 +109,7 @@ public class ProdutoService {
      * Realiza baixa de estoque de um produto
      */
     public BaixaEstoqueResponse realizarBaixaEstoque(Long produtoId, Integer quantidade) throws IOException {
-        String urlString = apiExternaUrl + "produtos/" + produtoId + "/baixa";
+        String urlString = apiExternaUrl + "/produtos/" + produtoId + "/baixa";
 
         HttpURLConnection connection = null;
         try {
@@ -185,7 +185,7 @@ public class ProdutoService {
      * Realiza baixa de estoque em lote
      */
     public Object realizarBaixaEstoqueEmLote(List<BaixaEstoqueRequest> requests) throws IOException {
-        String urlString = apiExternaUrl + "produtos/baixa";
+        String urlString = apiExternaUrl + "/produtos/baixa";
 
         HttpURLConnection connection = null;
         try {
