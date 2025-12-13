@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class Venda {
-    private final Id id;
+    private final Long id;
     private final Long clienteId;
     private final Long produtoId;
     private final ValorVenda valor;
@@ -18,7 +18,7 @@ public class Venda {
     private final LocalDateTime updatedAt;
 
     public Venda(Long id, Long clienteId, Long produtoId, ValorVenda valor, Integer quantidade) {
-        this.id = new Id(id);
+        this.id = id; // ID pode ser nulo na criação
         this.clienteId = clienteId;
         this.produtoId = produtoId;
         this.valor = valor;
@@ -30,7 +30,7 @@ public class Venda {
 
     public Venda(Long id, Long clienteId, Long produtoId, ValorVenda valor, Integer quantidade,
                  StatusVenda status) {
-        this.id = new Id(id);
+        this.id = id;
         this.clienteId = clienteId;
         this.produtoId = produtoId;
         this.valor = valor;
@@ -42,7 +42,7 @@ public class Venda {
 
     public Venda(Long id, Long clienteId, Long produtoId, ValorVenda valor, Integer quantidade,
                  StatusVenda status, LocalDateTime createdAt, LocalDateTime updatedAt) {
-        this.id = new Id(id);
+        this.id = id;
         this.clienteId = clienteId;
         this.produtoId = produtoId;
         this.valor = valor;
@@ -53,16 +53,20 @@ public class Venda {
     }
 
     public Venda atualizarStatus(StatusVenda novoStatus) {
-        return new Venda(this.id.getValue(), this.clienteId, this.produtoId, this.valor,
+        return new Venda(this.id, this.clienteId, this.produtoId, this.valor,
                         this.quantidade, novoStatus, this.createdAt, LocalDateTime.now());
     }
 
-    public Venda atualizarId(Id novoId) {
-        return new Venda(novoId.getValue(), this.clienteId, this.produtoId, this.valor,
+    public Venda atualizarId(Long novoId) {
+        return new Venda(novoId, this.clienteId, this.produtoId, this.valor,
                         this.quantidade, this.status, this.createdAt, this.updatedAt);
     }
 
     public Id getId() {
+        return id != null ? new Id(id) : null;
+    }
+
+    public Long getIdValue() {
         return id;
     }
 

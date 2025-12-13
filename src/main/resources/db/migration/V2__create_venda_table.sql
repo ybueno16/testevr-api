@@ -12,7 +12,7 @@ CREATE TABLE venda (
     CONSTRAINT fk_venda_cliente FOREIGN KEY (cliente_id) REFERENCES cliente(id),
     CONSTRAINT chk_valor_positivo CHECK (valor > 0),
     CONSTRAINT chk_quantidade_positiva CHECK (quantidade > 0),
-    CONSTRAINT chk_status CHECK (status IN ('PENDENTE', 'SUCESSO', 'ERRO', 'CANCELADA'))
+    CONSTRAINT chk_status CHECK (status IN ('PENDENTE', 'CONCLUIDA', 'SUCESSO', 'ERRO', 'CANCELADA'))
 );
 
 -- Create indexes for better performance

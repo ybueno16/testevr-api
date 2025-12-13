@@ -4,9 +4,10 @@ import com.testevr.testejava.venda.external.application.dto.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.http.HttpStatus;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -23,6 +24,8 @@ import java.util.Map;
 
 @Service
 public class ProdutoService {
+
+    private static final Logger logger = LoggerFactory.getLogger(ProdutoService.class);
 
     @Value("${produto.externa.api.url}")
     private String apiExternaUrl;
@@ -43,18 +46,20 @@ public class ProdutoService {
                 .create();
     }
 
-    /**
-     * Verifica se há estoque suficiente para um produto
-     */
     public boolean verificarEstoqueDisponivel(Long produtoId, Integer quantidade) throws IOException {
         ProdutoDto produto = buscarProdutoPorId(produtoId);
-        return produto != null && produto.getEstoque() != null
-                && produto.getEstoque() >= quantidade;
+        
+        if (produto == null) {
+            return false;
+        }
+        
+        if (produto.getEstoque() == null) {
+            return false;
+        }
+        
+        return produto.getEstoque() >= quantidade;
     }
 
-    /**
-     * Busca produto por ID (já implementado anteriormente)
-     */
     public ProdutoDto buscarProdutoPorId(Long id) throws IOException {
         String urlString = apiExternaUrl + "/produtos/" + id;
 
@@ -70,34 +75,18 @@ public class ProdutoService {
             int responseCode = connection.getResponseCode();
 
             if (responseCode == HttpURLConnection.HTTP_OK) {
-                try (BufferedReader reader = new BufferedReader(
-                        new InputStreamReader(connection.getInputStream(), StandardCharsets.UTF_8))) {
-
-                    StringBuilder response = new StringBuilder();
-                    String line;
-                    while ((line = reader.readLine()) != null) {
-                        response.append(line);
-                    }
-
-                    return gson.fromJson(response.toString(), ProdutoDto.class);
-                }
-            } else if (responseCode == HttpURLConnection.HTTP_NOT_FOUND) {
-                try (BufferedReader reader = new BufferedReader(
-                        new InputStreamReader(connection.getErrorStream(), StandardCharsets.UTF_8))) {
-
-                    StringBuilder errorResponse = new StringBuilder();
-                    String line;
-                    while ((line = reader.readLine()) != null) {
-                        errorResponse.append(line);
-                    }
-
-                    ErrorResponse error = gson.fromJson(errorResponse.toString(), ErrorResponse.class);
-                    throw new RuntimeException("Produto não encontrado: " + error.getMessage());
-                }
-            } else {
-                throw new IOException("Erro na requisição: " + responseCode);
+                return parseSuccessResponse(connection);
             }
+            
+            if (responseCode == HttpURLConnection.HTTP_NOT_FOUND) {
+                return handleNotFoundResponse(connection);
+            }
+            
+            throw new IOException("Erro na requisição: " + responseCode);
 
+        } catch (Exception e) {
+            logger.error("Erro ao conectar com a API externa de produtos: {}", e.getMessage());
+            throw new IOException("API de produtos indisponível: " + e.getMessage(), e);
         } finally {
             if (connection != null) {
                 connection.disconnect();
@@ -105,9 +94,35 @@ public class ProdutoService {
         }
     }
 
-    /**
-     * Realiza baixa de estoque de um produto
-     */
+    private ProdutoDto parseSuccessResponse(HttpURLConnection connection) throws IOException {
+        try (BufferedReader reader = new BufferedReader(
+                new InputStreamReader(connection.getInputStream(), StandardCharsets.UTF_8))) {
+
+            StringBuilder response = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                response.append(line);
+            }
+
+            return gson.fromJson(response.toString(), ProdutoDto.class);
+        }
+    }
+
+    private ProdutoDto handleNotFoundResponse(HttpURLConnection connection) throws IOException {
+        try (BufferedReader reader = new BufferedReader(
+                new InputStreamReader(connection.getErrorStream(), StandardCharsets.UTF_8))) {
+
+            StringBuilder errorResponse = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                errorResponse.append(line);
+            }
+
+            logger.warn("Produto não encontrado: {}", errorResponse.toString());
+            return null;
+        }
+    }
+
     public BaixaEstoqueResponse realizarBaixaEstoque(Long produtoId, Integer quantidade) throws IOException {
         String urlString = apiExternaUrl + "/produtos/" + produtoId + "/baixa";
 
@@ -122,12 +137,10 @@ public class ProdutoService {
             connection.setConnectTimeout(5000);
             connection.setReadTimeout(5000);
 
-            // Cria o objeto de requisição
             BaixaEstoqueRequest request = new BaixaEstoqueRequest();
             request.setQuantidade(quantidade);
             String requestBody = gson.toJson(request);
 
-            // Envia o corpo da requisição
             try (OutputStream os = connection.getOutputStream()) {
                 byte[] input = requestBody.getBytes(StandardCharsets.UTF_8);
                 os.write(input, 0, input.length);
@@ -136,43 +149,14 @@ public class ProdutoService {
             int responseCode = connection.getResponseCode();
 
             if (responseCode == HttpURLConnection.HTTP_OK) {
-                try (BufferedReader reader = new BufferedReader(
-                        new InputStreamReader(connection.getInputStream(), StandardCharsets.UTF_8))) {
-
-                    StringBuilder response = new StringBuilder();
-                    String line;
-                    while ((line = reader.readLine()) != null) {
-                        response.append(line);
-                    }
-
-                    return gson.fromJson(response.toString(), BaixaEstoqueResponse.class);
-                }
-            } else if (responseCode == HttpURLConnection.HTTP_BAD_REQUEST ||
-                    responseCode == HttpURLConnection.HTTP_NOT_FOUND) {
-                try (BufferedReader reader = new BufferedReader(
-                        new InputStreamReader(connection.getErrorStream(), StandardCharsets.UTF_8))) {
-
-                    StringBuilder errorResponse = new StringBuilder();
-                    String line;
-                    while ((line = reader.readLine()) != null) {
-                        errorResponse.append(line);
-                    }
-
-                    // Tenta deserializar como BaixaEstoqueResponse (para erro de estoque)
-                    try {
-                        BaixaEstoqueResponse error = gson.fromJson(errorResponse.toString(), BaixaEstoqueResponse.class);
-                        return error; // Retorna o erro para tratamento
-                    } catch (Exception e) {
-                        // Se não for BaixaEstoqueResponse, tenta como ErrorResponse
-                        ErrorResponse error = gson.fromJson(errorResponse.toString(), ErrorResponse.class);
-                        BaixaEstoqueResponse baixaError = new BaixaEstoqueResponse();
-                        baixaError.setMessage(error.getMessage());
-                        return baixaError;
-                    }
-                }
-            } else {
-                throw new IOException("Erro na requisição: " + responseCode);
+                return parseSuccessBaixaResponse(connection);
             }
+            
+            if (responseCode == HttpURLConnection.HTTP_BAD_REQUEST || responseCode == HttpURLConnection.HTTP_NOT_FOUND) {
+                return parseErrorBaixaResponse(connection);
+            }
+            
+            throw new IOException("Erro na requisição: " + responseCode);
 
         } finally {
             if (connection != null) {
@@ -181,9 +165,41 @@ public class ProdutoService {
         }
     }
 
-    /**
-     * Realiza baixa de estoque em lote
-     */
+    private BaixaEstoqueResponse parseSuccessBaixaResponse(HttpURLConnection connection) throws IOException {
+        try (BufferedReader reader = new BufferedReader(
+                new InputStreamReader(connection.getInputStream(), StandardCharsets.UTF_8))) {
+
+            StringBuilder response = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                response.append(line);
+            }
+
+            return gson.fromJson(response.toString(), BaixaEstoqueResponse.class);
+        }
+    }
+
+    private BaixaEstoqueResponse parseErrorBaixaResponse(HttpURLConnection connection) throws IOException {
+        try (BufferedReader reader = new BufferedReader(
+                new InputStreamReader(connection.getErrorStream(), StandardCharsets.UTF_8))) {
+
+            StringBuilder errorResponse = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                errorResponse.append(line);
+            }
+
+            try {
+                return gson.fromJson(errorResponse.toString(), BaixaEstoqueResponse.class);
+            } catch (Exception e) {
+                ErrorResponse error = gson.fromJson(errorResponse.toString(), ErrorResponse.class);
+                BaixaEstoqueResponse baixaError = new BaixaEstoqueResponse();
+                baixaError.setMessage(error.getMessage());
+                return baixaError;
+            }
+        }
+    }
+
     public Object realizarBaixaEstoqueEmLote(List<BaixaEstoqueRequest> requests) throws IOException {
         String urlString = apiExternaUrl + "/produtos/baixa";
 
@@ -222,13 +238,13 @@ public class ProdutoService {
                 if (responseCode == HttpURLConnection.HTTP_OK) {
                     return gson.fromJson(response.toString(), BaixaEstoqueResponse.class);
                 }
-                else if (responseCode == 207 || responseCode == HttpURLConnection.HTTP_BAD_REQUEST) {
+                
+                if (responseCode == 207 || responseCode == HttpURLConnection.HTTP_BAD_REQUEST) {
                     Type mapType = new TypeToken<Map<String, Object>>(){}.getType();
                     return gson.fromJson(response.toString(), mapType);
                 }
-                else {
-                    throw new IOException("Erro na requisição: " + responseCode + " - " + response.toString());
-                }
+                
+                throw new IOException("Erro na requisição: " + responseCode + " - " + response.toString());
             }
 
         } finally {

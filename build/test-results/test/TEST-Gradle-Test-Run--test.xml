@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="Gradle Test Run :test" tests="1" skipped="0" failures="1" errors="0" timestamp="2025-12-13T18:08:08.393Z" hostname="yuri" time="33.349">
+<testsuite name="Gradle Test Run :test" tests="1" skipped="0" failures="1" errors="0" timestamp="2025-12-13T18:56:50.615Z" hostname="yuri-bueno" time="44.825">
   <properties/>
-  <testcase name="failed to execute tests" classname="Gradle Test Run :test" time="33.349">
+  <testcase name="failed to execute tests" classname="Gradle Test Run :test" time="44.825">
     <failure message="org.gradle.internal.exceptions.DefaultMultiCauseException: Could not stop all services." type="org.gradle.internal.exceptions.DefaultMultiCauseException">org.gradle.internal.exceptions.DefaultMultiCauseException: Could not stop all services.
 	at org.gradle.internal.concurrent.CompositeStoppable.stop(CompositeStoppable.java:130)
 	at org.gradle.api.internal.tasks.testing.processors.MaxNParallelTestClassProcessor.stop(MaxNParallelTestClassProcessor.java:86)

@@ -7,6 +7,8 @@ import com.testevr.testejava.venda.internal.application.dto.VendaConsolidadaDto;
 import com.testevr.testejava.venda.internal.domain.entity.Venda;
 import com.testevr.testejava.venda.internal.domain.repository.VendaRepository;
 import com.testevr.testejava.venda.internal.domain.valueobject.StatusVenda;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,6 +17,9 @@ import java.util.List;
 
 @Service
 public class VendaService {
+    
+    private static final Logger logger = LoggerFactory.getLogger(VendaService.class);
+    
     private final VendaRepository repository;
     private final ProdutoService produtoService;
 
@@ -26,18 +31,81 @@ public class VendaService {
     @Transactional
     public Venda create(Venda venda) throws Exception {
         try {
-            // 1. Verificar se o produto existe
-            ProdutoDto produto = produtoService.buscarProdutoPorId(venda.getProdutoId());
-            if (produto == null) {
-                throw new RuntimeException("Produto não encontrado: " + venda.getProdutoId());
-            }
-
-            // 2. Criar venda com status PENDENTE inicialmente
-            Venda vendaPendente = venda.atualizarStatus(StatusVenda.PENDENTE);
-            return this.repository.create(vendaPendente);
+            ProdutoDto produto = validarProdutoExiste(venda.getProdutoId());
+            validarEstoqueDisponivel(produto);
+            
+            Integer quantidadeVendida = calcularQuantidadeVenda(venda.getQuantidade(), produto.getEstoque());
+            boolean vendaParcial = !quantidadeVendida.equals(venda.getQuantidade());
+            
+            logger.info("Processando venda - Produto: {}, Solicitado: {}, Disponível: {}, Vendida: {}", 
+                       venda.getProdutoId(), venda.getQuantidade(), produto.getEstoque(), quantidadeVendida);
+            
+            realizarBaixaEstoque(venda.getProdutoId(), quantidadeVendida);
+            
+            StatusVenda statusFinal = vendaParcial ? StatusVenda.PENDENTE : StatusVenda.CONCLUIDA;
+            
+            Venda vendaComDadosCorretos = new Venda(
+                null,
+                venda.getClienteId(),
+                venda.getProdutoId(),
+                venda.getValor(),
+                quantidadeVendida,
+                statusFinal
+            );
+            
+            Venda vendaCriada = this.repository.create(vendaComDadosCorretos);
+            
+            logResultadoVenda(venda, quantidadeVendida, vendaParcial, vendaCriada);
+            
+            return vendaCriada;
 
         } catch (IOException e) {
+            logger.error("Erro de comunicação ao verificar produto: {}", e.getMessage());
             throw new RuntimeException("Erro de comunicação ao verificar produto: " + e.getMessage(), e);
+        } catch (Exception e) {
+            logger.error("Erro na criação da venda: {}", e.getMessage(), e);
+            throw e;
+        }
+    }
+
+    private ProdutoDto validarProdutoExiste(Long produtoId) throws IOException {
+        ProdutoDto produto = produtoService.buscarProdutoPorId(produtoId);
+        
+        if (produto == null) {
+            throw new RuntimeException("Produto não encontrado: " + produtoId);
+        }
+        
+        return produto;
+    }
+
+    private void validarEstoqueDisponivel(ProdutoDto produto) {
+        if (produto.getEstoque() <= 0) {
+            throw new RuntimeException("Produto sem estoque disponível. Estoque atual: " + produto.getEstoque());
+        }
+    }
+
+    private Integer calcularQuantidadeVenda(Integer quantidadeSolicitada, Integer estoqueDisponivel) {
+        return Math.min(quantidadeSolicitada, estoqueDisponivel);
+    }
+
+    private void realizarBaixaEstoque(Long produtoId, Integer quantidade) {
+        try {
+            BaixaEstoqueResponse baixaResponse = produtoService.realizarBaixaEstoque(produtoId, quantidade);
+            logger.info("Baixa de estoque realizada com sucesso: {}", baixaResponse.getMessage());
+        } catch (Exception e) {
+            logger.error("Falha na baixa de estoque: {}", e.getMessage());
+            throw new RuntimeException("Erro ao realizar baixa de estoque: " + e.getMessage());
+        }
+    }
+
+    private void logResultadoVenda(Venda vendaOriginal, Integer quantidadeVendida, boolean vendaParcial, Venda vendaCriada) {
+        logger.info("Venda criada com sucesso - ID: {}, Quantidade: {}, Status: {}", 
+                   vendaCriada.getIdValue(), vendaCriada.getQuantidade(), vendaCriada.getStatus());
+        
+        if (vendaParcial) {
+            logger.info("Venda parcial realizada - Solicitado: {}, Vendido: {}, Pendente: {}", 
+                       vendaOriginal.getQuantidade(), quantidadeVendida, 
+                       vendaOriginal.getQuantidade() - quantidadeVendida);
         }
     }
 
@@ -59,6 +127,7 @@ public class VendaService {
 
     public Venda atualizarStatus(Long id, StatusVenda status) {
         Venda venda = this.repository.findById(id);
+        
         if (venda == null) {
             throw new RuntimeException("Venda não encontrada");
         }
@@ -70,20 +139,18 @@ public class VendaService {
     @Transactional
     public Venda cancelarVenda(Long id) {
         Venda venda = this.repository.findById(id);
+        
         if (venda == null) {
             throw new RuntimeException("Venda não encontrada");
         }
 
-        // Só pode cancelar vendas que estão com status SUCESSO ou PENDENTE
         if (venda.getStatus() == StatusVenda.CANCELADA || venda.getStatus() == StatusVenda.ERRO) {
             throw new RuntimeException("Venda já foi cancelada ou está com erro");
         }
 
         try {
-
             Venda vendaCancelada = venda.atualizarStatus(StatusVenda.CANCELADA);
             return this.repository.update(vendaCancelada);
-
         } catch (Exception e) {
             throw new RuntimeException("Erro ao cancelar venda: " + e.getMessage());
         }
@@ -92,46 +159,45 @@ public class VendaService {
     @Transactional
     public void delete(Long id) {
         Venda venda = this.repository.findById(id);
+        
         if (venda != null && venda.getStatus() == StatusVenda.SUCESSO) {
-            // Se a venda foi bem-sucedida, considere cancelá-la primeiro para lidar com o estoque
             cancelarVenda(id);
         }
+        
         this.repository.delete(id);
     }
 
     @Transactional
     public Venda adicionarProdutoVenda(Long vendaId, Long produtoId, Integer quantidade) {
         Venda venda = this.repository.findById(vendaId);
+        
         if (venda == null) {
             throw new RuntimeException("Venda não encontrada");
         }
 
-        // Verificar se a venda pode ser editada
         if (venda.getStatus() == StatusVenda.SUCESSO || venda.getStatus() == StatusVenda.CANCELADA) {
             throw new RuntimeException("Não é possível editar uma venda finalizada ou cancelada");
         }
 
         try {
-            // Verificar estoque do produto
-            boolean estoqueDisponivel = produtoService.verificarEstoqueDisponivel(produtoId, quantidade);
-            if (!estoqueDisponivel) {
-                throw new RuntimeException("Estoque insuficiente para o produto ID: " + produtoId);
+            ProdutoDto produto = produtoService.buscarProdutoPorId(produtoId);
+            
+            if (produto == null) {
+                throw new RuntimeException("Produto não encontrado: " + produtoId);
+            }
+            
+            if (produto.getEstoque() < quantidade) {
+                throw new RuntimeException("Estoque insuficiente para o produto ID: " + produtoId + 
+                    ". Disponível: " + produto.getEstoque() + ", Solicitado: " + quantidade);
             }
 
-            // Se o produto já existe na venda, somar as quantidades
-            // Para simplificar, vamos criar uma nova venda com o produto adicional
-            // Em uma implementação real, teríamos uma estrutura para múltiplos produtos por venda
-            
-            // Por enquanto, como temos apenas um produto por venda, vamos atualizar
             Venda vendaAtualizada;
             if (venda.getProdutoId().equals(produtoId)) {
-                // Mesmo produto - somar quantidade
                 int novaQuantidade = venda.getQuantidade() + quantidade;
-                vendaAtualizada = new Venda(venda.getId().getValue(), venda.getClienteId(), 
+                vendaAtualizada = new Venda(venda.getIdValue(), venda.getClienteId(), 
                                           produtoId, venda.getValor(), novaQuantidade, venda.getStatus());
             } else {
-                // Produto diferente - substituir (limitação atual do modelo)
-                vendaAtualizada = new Venda(venda.getId().getValue(), venda.getClienteId(), 
+                vendaAtualizada = new Venda(venda.getIdValue(), venda.getClienteId(), 
                                           produtoId, venda.getValor(), quantidade, venda.getStatus());
             }
 
@@ -145,12 +211,15 @@ public class VendaService {
     @Transactional  
     public Venda editarVenda(Venda vendaAtualizada) {
         try {
-            // Verificar estoque para a nova quantidade
-            boolean estoqueDisponivel = produtoService.verificarEstoqueDisponivel(
-                    vendaAtualizada.getProdutoId(), vendaAtualizada.getQuantidade());
+            ProdutoDto produto = produtoService.buscarProdutoPorId(vendaAtualizada.getProdutoId());
             
-            if (!estoqueDisponivel) {
-                throw new RuntimeException("Estoque insuficiente para o produto ID: " + vendaAtualizada.getProdutoId());
+            if (produto == null) {
+                throw new RuntimeException("Produto não encontrado: " + vendaAtualizada.getProdutoId());
+            }
+            
+            if (produto.getEstoque() < vendaAtualizada.getQuantidade()) {
+                throw new RuntimeException("Estoque insuficiente para o produto ID: " + vendaAtualizada.getProdutoId() + 
+                    ". Disponível: " + produto.getEstoque() + ", Solicitado: " + vendaAtualizada.getQuantidade());
             }
 
             return this.repository.update(vendaAtualizada);
@@ -163,6 +232,7 @@ public class VendaService {
     @Transactional
     public Venda finalizarVendaParcial(Long vendaId) {
         Venda venda = this.repository.findById(vendaId);
+        
         if (venda == null) {
             throw new RuntimeException("Venda não encontrada");
         }
@@ -172,55 +242,66 @@ public class VendaService {
         }
 
         try {
-            // Verificar estoque disponível
-            boolean estoqueDisponivel = produtoService.verificarEstoqueDisponivel(
-                    venda.getProdutoId(), venda.getQuantidade());
-
-            if (estoqueDisponivel) {
-                // Estoque completo disponível - finalizar normalmente
-                BaixaEstoqueResponse response = produtoService.realizarBaixaEstoque(
-                        venda.getProdutoId(), venda.getQuantidade());
-
-                if (response.getMessage() != null && response.getMessage().contains("sucesso")) {
-                    Venda vendaFinalizada = venda.atualizarStatus(StatusVenda.SUCESSO);
-                    return this.repository.update(vendaFinalizada);
-                } else {
-                    throw new RuntimeException("Falha na baixa do estoque");
-                }
-            } else {
-                // Estoque insuficiente - finalização parcial
-                // Primeiro busca o produto para ver quanto estoque tem
-                ProdutoDto produto = produtoService.buscarProdutoPorId(venda.getProdutoId());
-                
-                if (produto.getEstoque() > 0) {
-                    // Fazer baixa parcial do que tem disponível
-                    BaixaEstoqueResponse response = produtoService.realizarBaixaEstoque(
-                            venda.getProdutoId(), produto.getEstoque());
-
-                    if (response.getMessage() != null && response.getMessage().contains("sucesso")) {
-                        // Atualizar quantidade da venda para refletir a quantidade finalizada
-                        Venda vendaParcial = new Venda(
-                                venda.getId().getValue(),
-                                venda.getClienteId(),
-                                venda.getProdutoId(),
-                                venda.getValor(),
-                                produto.getEstoque(), // Quantidade finalizada (parcial)
-                                StatusVenda.SUCESSO,
-                                venda.getCreatedAt(),
-                                venda.getUpdatedAt()
-                        );
-                        return this.repository.update(vendaParcial);
-                    } else {
-                        throw new RuntimeException("Falha na baixa parcial do estoque");
-                    }
-                } else {
-                    // Sem estoque disponível
-                    throw new RuntimeException("Sem estoque disponível para finalização parcial");
-                }
+            ProdutoDto produto = produtoService.buscarProdutoPorId(venda.getProdutoId());
+            
+            if (produto == null) {
+                throw new RuntimeException("Produto não encontrado: " + venda.getProdutoId());
             }
+
+            if (produto.getEstoque() >= venda.getQuantidade()) {
+                return finalizarVendaCompleta(venda);
+            }
+            
+            if (produto.getEstoque() <= 0) {
+                throw new RuntimeException("Sem estoque disponível para finalização parcial");
+            }
+            
+            return finalizarVendaParcialComEstoqueDisponivel(venda, produto);
 
         } catch (IOException e) {
             throw new RuntimeException("Erro de comunicação com API externa: " + e.getMessage(), e);
+        }
+    }
+
+    private Venda finalizarVendaCompleta(Venda venda) {
+        try {
+            BaixaEstoqueResponse response = produtoService.realizarBaixaEstoque(
+                    venda.getProdutoId(), venda.getQuantidade());
+
+            if (response.getMessage() != null && response.getMessage().contains("sucesso")) {
+                Venda vendaFinalizada = venda.atualizarStatus(StatusVenda.SUCESSO);
+                return this.repository.update(vendaFinalizada);
+            }
+            
+            throw new RuntimeException("Falha na baixa do estoque");
+        } catch (Exception e) {
+            throw new RuntimeException("Erro ao finalizar venda: " + e.getMessage());
+        }
+    }
+
+    private Venda finalizarVendaParcialComEstoqueDisponivel(Venda venda, ProdutoDto produto) {
+        try {
+            BaixaEstoqueResponse response = produtoService.realizarBaixaEstoque(
+                    venda.getProdutoId(), produto.getEstoque());
+
+            if (response.getMessage() == null || !response.getMessage().contains("sucesso")) {
+                throw new RuntimeException("Falha na baixa parcial do estoque");
+            }
+
+            Venda vendaParcial = new Venda(
+                    venda.getIdValue(),
+                    venda.getClienteId(),
+                    venda.getProdutoId(),
+                    venda.getValor(),
+                    produto.getEstoque(),
+                    StatusVenda.SUCESSO,
+                    venda.getCreatedAt(),
+                    venda.getUpdatedAt()
+            );
+            
+            return this.repository.update(vendaParcial);
+        } catch (Exception e) {
+            throw new RuntimeException("Erro ao realizar baixa parcial: " + e.getMessage());
         }
     }
 
@@ -230,5 +311,24 @@ public class VendaService {
 
     public List<VendaConsolidadaDto> buscarVendasConsolidadasPorCliente(Long clienteId) {
         return this.repository.buscarVendasConsolidadasPorCliente(clienteId);
+    }
+
+    public Integer verificarEstoqueDisponivel(Long produtoId) throws IOException {
+        try {
+            ProdutoDto produto = produtoService.buscarProdutoPorId(produtoId);
+            
+            if (produto == null) {
+                throw new RuntimeException("Produto não encontrado: " + produtoId);
+            }
+            
+            return produto.getEstoque();
+        } catch (IOException e) {
+            throw new RuntimeException("Erro ao consultar estoque do produto: " + produtoId, e);
+        }
+    }
+
+    public Integer simularVenda(Long produtoId, Integer quantidadeSolicitada) throws IOException {
+        Integer estoqueDisponivel = verificarEstoqueDisponivel(produtoId);
+        return Math.min(quantidadeSolicitada, Math.max(0, estoqueDisponivel));
     }
 }

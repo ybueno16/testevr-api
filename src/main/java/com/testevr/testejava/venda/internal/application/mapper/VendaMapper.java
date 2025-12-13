@@ -1,5 +1,6 @@
 package com.testevr.testejava.venda.internal.application.mapper;
 
+import com.testevr.testejava.venda.internal.application.dto.CriarVendaDto;
 import com.testevr.testejava.venda.internal.application.dto.VendaDto;
 import com.testevr.testejava.venda.internal.application.dto.VendaExternaRequest;
 import com.testevr.testejava.venda.internal.domain.entity.Venda;
@@ -9,6 +10,16 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class VendaMapper {
+
+    public Venda toEntity(CriarVendaDto dto) {
+        if (dto == null) {
+            return null;
+        }
+
+        ValorVenda valor = new ValorVenda(dto.getValor());
+        // Para criação, não passamos ID (será autogerado) e o status será PENDENTE por padrão
+        return new Venda(null, dto.getClienteId(), dto.getProdutoId(), valor, dto.getQuantidade());
+    }
 
     public Venda toEntity(VendaDto dto) {
         if (dto == null) {
@@ -32,7 +43,7 @@ public class VendaMapper {
         }
 
         return new VendaDto(
-            venda.getId().getValue(),
+            venda.getIdValue(),
             venda.getClienteId(),
             venda.getProdutoId(),
             venda.getValor().getValor(),

@@ -7,6 +7,11 @@ public class Id {
 
     public Id(Long valor) {
         if (valor == null) {
+            StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
+            System.err.println("=== DEBUG: Tentando criar ID com valor nulo ===");
+            for (int i = 0; i < Math.min(stackTrace.length, 10); i++) {
+                System.err.println("  " + stackTrace[i]);
+            }
             throw new IllegalArgumentException("ID não pode ser nulo");
         }
         if (valor <= 0) {

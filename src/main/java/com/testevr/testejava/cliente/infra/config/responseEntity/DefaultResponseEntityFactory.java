@@ -9,7 +9,7 @@ public class DefaultResponseEntityFactory {
             String pMessage, Object pObject, HttpStatus pHttpStatus) {
         System.out.println(pMessage);
 
-        return new ResponseEntity<DefaultResponseEntity>(
+        return new ResponseEntity<>(
                 new DefaultResponseEntity(pMessage, pObject), pHttpStatus);
     }
 }

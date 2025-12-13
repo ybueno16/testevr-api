@@ -58,7 +58,7 @@ public class VendaRepositoryImpl implements VendaRepository {
                 }
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Erro ao criar venda", e);
+            throw new RuntimeException("Erro ao criar venda: " + e.getMessage() + " (Código: " + e.getSQLState() + ")", e);
         }
 
         throw new RuntimeException("Erro ao criar venda");
@@ -78,7 +78,7 @@ public class VendaRepositoryImpl implements VendaRepository {
             stmt.setInt(4, venda.getQuantidade());
             stmt.setString(5, venda.getStatus().name());
             stmt.setTimestamp(6, Timestamp.valueOf(venda.getUpdatedAt()));
-            stmt.setLong(7, venda.getId().getValue());
+            stmt.setLong(7, venda.getIdValue());
 
             int rowsAffected = stmt.executeUpdate();
             if (rowsAffected > 0) {
