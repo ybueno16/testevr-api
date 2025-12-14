@@ -8,7 +8,6 @@ public class VendaConsolidadaDto {
     private BigDecimal valorTotal;
     private Integer quantidadeVendas;
 
-    // Construtores
     public VendaConsolidadaDto() {}
 
     public VendaConsolidadaDto(Long clienteId, String status, BigDecimal valorTotal, Integer quantidadeVendas) {
@@ -18,7 +17,6 @@ public class VendaConsolidadaDto {
         this.quantidadeVendas = quantidadeVendas;
     }
 
-    // Getters e Setters
     public Long getClienteId() {
         return clienteId;
     }

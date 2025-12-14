@@ -8,7 +8,6 @@ public class VendaExternaRequest {
     private BigDecimal valor;
     private Integer quantidade;
 
-    // Construtores
     public VendaExternaRequest() {}
 
     public VendaExternaRequest(Long clienteId, Long produtoId, BigDecimal valor, Integer quantidade) {
@@ -18,7 +17,6 @@ public class VendaExternaRequest {
         this.quantidade = quantidade;
     }
 
-    // Getters e Setters
     public Long getClienteId() {
         return clienteId;
     }

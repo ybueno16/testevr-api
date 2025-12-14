@@ -17,7 +17,6 @@ public class VendaMapper {
         }
 
         ValorVenda valor = new ValorVenda(dto.getValor());
-        // Para criação, não passamos ID (será autogerado) e o status será PENDENTE por padrão
         return new Venda(null, dto.getClienteId(), dto.getProdutoId(), valor, dto.getQuantidade());
     }
 
@@ -49,32 +48,6 @@ public class VendaMapper {
             venda.getValor().getValor(),
             venda.getQuantidade(),
             venda.getStatus().name()
-        );
-    }
-
-    public VendaExternaRequest toExternaRequest(VendaDto dto) {
-        if (dto == null) {
-            return null;
-        }
-
-        return new VendaExternaRequest(
-            dto.getClienteId(),
-            dto.getProdutoId(),
-            dto.getValor(),
-            dto.getQuantidade()
-        );
-    }
-
-    public VendaExternaRequest toExternaRequest(Venda venda) {
-        if (venda == null) {
-            return null;
-        }
-
-        return new VendaExternaRequest(
-            venda.getClienteId(),
-            venda.getProdutoId(),
-            venda.getValor().getValor(),
-            venda.getQuantidade()
         );
     }
 }

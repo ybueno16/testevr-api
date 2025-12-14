@@ -208,48 +208,5 @@ public class VendaController {
             throw new RuntimeException("Erro ao editar venda: " + e.getMessage(), e);
         }
     }
-
-    @PostMapping("/teste-baixa-estoque")
-    public ResponseEntity<?> testeBaixaEstoque(@RequestBody BaixaEstoqueRequest request) {
-        try {
-            logger.info("Testando baixa de estoque - Produto: {}, Quantidade: {}", 
-                       request.getId(), request.getQuantidade());
-            
-            BaixaEstoqueResponse response = produtoService.realizarBaixaEstoque(
-                request.getId(), 
-                request.getQuantidade()
-            );
-            
-            return ResponseEntity.ok(response);
-        } catch (Exception e) {
-            logger.error("Erro no teste de baixa de estoque: {}", e.getMessage());
-            return ResponseEntity.badRequest().body("Erro na baixa de estoque: " + e.getMessage());
-        }
-    }
-
-    @PostMapping("/simular-venda")
-    public ResponseEntity<?> simularVenda(@RequestBody CriarVendaDto vendaDto) {
-        try {
-            logger.info("Simulando venda - Produto: {}, Quantidade: {}", 
-                       vendaDto.getProdutoId(), vendaDto.getQuantidade());
-            
-            Integer estoqueDisponivel = vendaService.verificarEstoqueDisponivel(vendaDto.getProdutoId());
-            Integer quantidadePossivel = vendaService.simularVenda(vendaDto.getProdutoId(), vendaDto.getQuantidade());
-            
-            boolean vendaParcial = !quantidadePossivel.equals(vendaDto.getQuantidade());
-            
-            return ResponseEntity.ok(java.util.Map.of(
-                "produtoId", vendaDto.getProdutoId(),
-                "quantidadeSolicitada", vendaDto.getQuantidade(),
-                "estoqueDisponivel", estoqueDisponivel,
-                "quantidadeQueSeriaVendida", quantidadePossivel,
-                "vendaParcial", vendaParcial,
-                "statusEsperado", vendaParcial ? "PENDENTE" : "CONCLUIDA"
-            ));
-        } catch (Exception e) {
-            logger.error("Erro na simulação de venda: {}", e.getMessage());
-            return ResponseEntity.badRequest().body("Erro na simulação: " + e.getMessage());
-        }
-    }
 }
 

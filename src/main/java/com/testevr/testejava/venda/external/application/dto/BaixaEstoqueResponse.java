@@ -1,4 +1,3 @@
-// BaixaEstoqueResponse.java
 package com.testevr.testejava.venda.external.application.dto;
 
 public class BaixaEstoqueResponse {
@@ -6,14 +5,12 @@ public class BaixaEstoqueResponse {
     private Integer estoqueAtual;
     private Integer quantidadeSolicitada;
 
-    // Construtores
     public BaixaEstoqueResponse() {}
 
     public BaixaEstoqueResponse(String message) {
         this.message = message;
     }
 
-    // Getters e Setters
     public String getMessage() { return message; }
     public void setMessage(String message) { this.message = message; }
 

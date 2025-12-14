@@ -46,20 +46,6 @@ public class ProdutoService {
                 .create();
     }
 
-    public boolean verificarEstoqueDisponivel(Long produtoId, Integer quantidade) throws IOException {
-        ProdutoDto produto = buscarProdutoPorId(produtoId);
-        
-        if (produto == null) {
-            return false;
-        }
-        
-        if (produto.getEstoque() == null) {
-            return false;
-        }
-        
-        return produto.getEstoque() >= quantidade;
-    }
-
     public ProdutoDto buscarProdutoPorId(Long id) throws IOException {
         String urlString = apiExternaUrl + "/produtos/" + id;
 

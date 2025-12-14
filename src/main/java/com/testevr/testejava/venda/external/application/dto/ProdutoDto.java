@@ -1,4 +1,3 @@
-// ProdutoDto.java
 package com.testevr.testejava.venda.external.application.dto;
 
 import java.time.LocalDateTime;
@@ -11,7 +10,6 @@ public class ProdutoDto {
     private String unidade;
     private LocalDateTime ultimaAtualizacao;
 
-    // Construtores
     public ProdutoDto() {}
 
     public ProdutoDto(Long id, String descricao, Integer estoque, Double preco,
