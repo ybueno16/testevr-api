@@ -19,7 +19,6 @@ public class ClienteMapper {
         if (dto == null) return null;
 
         if (dto.getId() != null) {
-            // Atualização - com ID
             return new Cliente(
                     dto.getId(),
                     new Nome(dto.getNome()),
@@ -31,7 +30,6 @@ public class ClienteMapper {
                     dto.getUpdatedAt() != null ? dto.getUpdatedAt() : LocalDateTime.now()
             );
         } else {
-            // Criação - sem ID
             return new Cliente(
                     null,
                     new Nome(dto.getNome()),

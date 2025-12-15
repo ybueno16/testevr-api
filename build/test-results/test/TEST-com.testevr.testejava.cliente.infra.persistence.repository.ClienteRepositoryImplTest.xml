@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.testevr.testejava.cliente.infra.persistence.repository.ClienteRepositoryImplTest" tests="14" skipped="0" failures="0" errors="0" timestamp="2025-12-15T23:52:06.167Z" hostname="yuri-bueno" time="0.581">
+  <properties/>
+  <testcase name="update_shouldThrowRuntimeException_whenNoRowsAffected()" classname="com.testevr.testejava.cliente.infra.persistence.repository.ClienteRepositoryImplTest" time="0.453"/>
+  <testcase name="findById_shouldReturnCliente_whenFound()" classname="com.testevr.testejava.cliente.infra.persistence.repository.ClienteRepositoryImplTest" time="0.015"/>
+  <testcase name="findAll_shouldThrowRuntimeException_whenSQLExceptionOccurs()" classname="com.testevr.testejava.cliente.infra.persistence.repository.ClienteRepositoryImplTest" time="0.011"/>
+  <testcase name="update_shouldThrowRuntimeException_whenSQLExceptionOccurs()" classname="com.testevr.testejava.cliente.infra.persistence.repository.ClienteRepositoryImplTest" time="0.01"/>
+  <testcase name="delete_shouldExecuteDeleteSuccessfully()" classname="com.testevr.testejava.cliente.infra.persistence.repository.ClienteRepositoryImplTest" time="0.009"/>
+  <testcase name="delete_shouldThrowRuntimeException_whenSQLExceptionOccurs()" classname="com.testevr.testejava.cliente.infra.persistence.repository.ClienteRepositoryImplTest" time="0.01"/>
+  <testcase name="create_shouldReturnClienteWithId_whenInsertIsSuccessful()" classname="com.testevr.testejava.cliente.infra.persistence.repository.ClienteRepositoryImplTest" time="0.018"/>
+  <testcase name="findById_shouldThrowRuntimeException_whenSQLExceptionOccurs()" classname="com.testevr.testejava.cliente.infra.persistence.repository.ClienteRepositoryImplTest" time="0.01"/>
+  <testcase name="findAll_shouldReturnEmptyList_whenNoClientes()" classname="com.testevr.testejava.cliente.infra.persistence.repository.ClienteRepositoryImplTest" time="0.005"/>
+  <testcase name="findById_shouldReturnNull_whenNotFound()" classname="com.testevr.testejava.cliente.infra.persistence.repository.ClienteRepositoryImplTest" time="0.004"/>
+  <testcase name="create_shouldThrowRuntimeException_whenSQLExceptionOccurs()" classname="com.testevr.testejava.cliente.infra.persistence.repository.ClienteRepositoryImplTest" time="0.008"/>
+  <testcase name="update_shouldReturnUpdatedCliente_whenUpdateIsSuccessful()" classname="com.testevr.testejava.cliente.infra.persistence.repository.ClienteRepositoryImplTest" time="0.006"/>
+  <testcase name="create_shouldThrowRuntimeException_whenNoResultSet()" classname="com.testevr.testejava.cliente.infra.persistence.repository.ClienteRepositoryImplTest" time="0.006"/>
+  <testcase name="findAll_shouldReturnListOfClientes()" classname="com.testevr.testejava.cliente.infra.persistence.repository.ClienteRepositoryImplTest" time="0.005"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

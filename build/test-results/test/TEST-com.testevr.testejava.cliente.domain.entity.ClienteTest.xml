@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.testevr.testejava.cliente.domain.entity.ClienteTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2025-12-15T23:52:06.009Z" hostname="yuri-bueno" time="0.009">
+  <properties/>
+  <testcase name="testToString()" classname="com.testevr.testejava.cliente.domain.entity.ClienteTest" time="0.003"/>
+  <testcase name="testAtualizarId()" classname="com.testevr.testejava.cliente.domain.entity.ClienteTest" time="0.0"/>
+  <testcase name="testEqualsComNullEOutroTipo()" classname="com.testevr.testejava.cliente.domain.entity.ClienteTest" time="0.002"/>
+  <testcase name="testAtualizarIdComNull()" classname="com.testevr.testejava.cliente.domain.entity.ClienteTest" time="0.001"/>
+  <testcase name="testConstrutorCompleto()" classname="com.testevr.testejava.cliente.domain.entity.ClienteTest" time="0.001"/>
+  <testcase name="testConstrutorComId()" classname="com.testevr.testejava.cliente.domain.entity.ClienteTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

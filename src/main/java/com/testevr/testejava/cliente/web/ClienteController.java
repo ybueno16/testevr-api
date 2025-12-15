@@ -23,6 +23,7 @@ public class ClienteController {
         this.mapper = mapper;
     }
 
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<ClienteDto> criarCliente(@RequestBody ClienteDto clienteDto) {
@@ -35,6 +36,7 @@ public class ClienteController {
             throw new RuntimeException("Erro ao criar cliente: " + e.getMessage(), e);
         }
     }
+
 
     @GetMapping("/{id}")
     public ResponseEntity<ClienteDto> buscarPorId(@PathVariable Long id) {
@@ -53,6 +55,7 @@ public class ClienteController {
                 .collect(Collectors.toList());
         return ResponseEntity.ok(clientesDto);
     }
+
 
     @PutMapping("/{id}")
     public ResponseEntity<ClienteDto> atualizarCliente(@PathVariable Long id, @RequestBody ClienteDto clienteDto) {

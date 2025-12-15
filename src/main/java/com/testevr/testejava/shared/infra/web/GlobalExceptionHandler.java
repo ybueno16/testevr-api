@@ -1,6 +1,6 @@
 package com.testevr.testejava.shared.infra.web;
 
-import com.testevr.testejava.cliente.infra.config.responseEntity.DefaultResponseEntityFactory;
+import com.testevr.testejava.shared.config.responseEntity.DefaultResponseEntityFactory;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

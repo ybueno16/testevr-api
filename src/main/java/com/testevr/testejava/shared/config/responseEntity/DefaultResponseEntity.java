@@ -1,4 +1,4 @@
-package com.testevr.testejava.cliente.infra.config.responseEntity;
+package com.testevr.testejava.shared.config.responseEntity;
 
 public class DefaultResponseEntity<T> {
     protected final String message;

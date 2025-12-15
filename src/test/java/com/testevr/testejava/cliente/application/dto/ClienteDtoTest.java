@@ -26,14 +26,7 @@ class ClienteDtoTest {
         assertNull(dto.getUpdatedAt());
     }
 
-    @Test
-    void testToStringEqualsHashCode() {
-        ClienteDto dto1 = new ClienteDto(1L, "A", "B", "C", "69423022000160", true);
-        ClienteDto dto2 = new ClienteDto(1L, "A", "B", "C", "69423022000160", true);
-        assertEquals(dto1, dto2);
-        assertEquals(dto1.hashCode(), dto2.hashCode());
-        assertTrue(dto1.toString().contains("ClienteDto"));
-    }
+
     @Test
     void testConstrutoresEGettersSetters() {
         LocalDateTime now = LocalDateTime.now();

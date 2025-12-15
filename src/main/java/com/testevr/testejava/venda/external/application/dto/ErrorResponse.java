@@ -1,4 +1,3 @@
-// ErrorResponse.java (para tratamento de erros)
 package com.testevr.testejava.venda.external.application.dto;
 
 public class ErrorResponse {

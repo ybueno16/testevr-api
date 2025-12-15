@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.testevr.testejava.venda.external.application.dto.ProdutoDtoTest" tests="24" skipped="0" failures="0" errors="0" timestamp="2025-12-15T23:52:07.419Z" hostname="yuri-bueno" time="0.02">
+  <properties/>
+  <testcase name="testLargeValues()" classname="com.testevr.testejava.venda.external.application.dto.ProdutoDtoTest" time="0.001"/>
+  <testcase name="testZeroValues()" classname="com.testevr.testejava.venda.external.application.dto.ProdutoDtoTest" time="0.001"/>
+  <testcase name="testGetDescricao()" classname="com.testevr.testejava.venda.external.application.dto.ProdutoDtoTest" time="0.0"/>
+  <testcase name="testGetPreco()" classname="com.testevr.testejava.venda.external.application.dto.ProdutoDtoTest" time="0.0"/>
+  <testcase name="testGetId()" classname="com.testevr.testejava.venda.external.application.dto.ProdutoDtoTest" time="0.001"/>
+  <testcase name="testSetId()" classname="com.testevr.testejava.venda.external.application.dto.ProdutoDtoTest" time="0.001"/>
+  <testcase name="testGetEstoque()" classname="com.testevr.testejava.venda.external.application.dto.ProdutoDtoTest" time="0.001"/>
+  <testcase name="testNoArgsConstructor()" classname="com.testevr.testejava.venda.external.application.dto.ProdutoDtoTest" time="0.001"/>
+  <testcase name="testEmptyStringValues()" classname="com.testevr.testejava.venda.external.application.dto.ProdutoDtoTest" time="0.0"/>
+  <testcase name="testSettersAndGetters()" classname="com.testevr.testejava.venda.external.application.dto.ProdutoDtoTest" time="0.0"/>
+  <testcase name="testSetDescricao()" classname="com.testevr.testejava.venda.external.application.dto.ProdutoDtoTest" time="0.001"/>
+  <testcase name="testGetUnidade()" classname="com.testevr.testejava.venda.external.application.dto.ProdutoDtoTest" time="0.002"/>
+  <testcase name="testMultipleInstances()" classname="com.testevr.testejava.venda.external.application.dto.ProdutoDtoTest" time="0.0"/>
+  <testcase name="testUpdateValues()" classname="com.testevr.testejava.venda.external.application.dto.ProdutoDtoTest" time="0.001"/>
+  <testcase name="testAllArgsConstructor()" classname="com.testevr.testejava.venda.external.application.dto.ProdutoDtoTest" time="0.001"/>
+  <testcase name="testUnidadesDiferentes()" classname="com.testevr.testejava.venda.external.application.dto.ProdutoDtoTest" time="0.001"/>
+  <testcase name="testSetEstoque()" classname="com.testevr.testejava.venda.external.application.dto.ProdutoDtoTest" time="0.0"/>
+  <testcase name="testNegativeValues()" classname="com.testevr.testejava.venda.external.application.dto.ProdutoDtoTest" time="0.0"/>
+  <testcase name="testNullValues()" classname="com.testevr.testejava.venda.external.application.dto.ProdutoDtoTest" time="0.001"/>
+  <testcase name="testSetUltimaAtualizacao()" classname="com.testevr.testejava.venda.external.application.dto.ProdutoDtoTest" time="0.0"/>
+  <testcase name="testPrecoPrecisao()" classname="com.testevr.testejava.venda.external.application.dto.ProdutoDtoTest" time="0.0"/>
+  <testcase name="testSetUnidade()" classname="com.testevr.testejava.venda.external.application.dto.ProdutoDtoTest" time="0.0"/>
+  <testcase name="testGetUltimaAtualizacao()" classname="com.testevr.testejava.venda.external.application.dto.ProdutoDtoTest" time="0.001"/>
+  <testcase name="testSetPreco()" classname="com.testevr.testejava.venda.external.application.dto.ProdutoDtoTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,4 +1,4 @@
-package com.testevr.testejava.cliente.infra.config.responseEntity;
+package com.testevr.testejava.shared.config.responseEntity;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

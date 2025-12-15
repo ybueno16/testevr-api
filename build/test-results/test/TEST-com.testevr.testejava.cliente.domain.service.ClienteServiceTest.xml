@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.testevr.testejava.cliente.domain.service.ClienteServiceTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2025-12-15T23:52:06.075Z" hostname="yuri-bueno" time="0.061">
+  <properties/>
+  <testcase name="testFindAll()" classname="com.testevr.testejava.cliente.domain.service.ClienteServiceTest" time="0.055"/>
+  <testcase name="testFindById()" classname="com.testevr.testejava.cliente.domain.service.ClienteServiceTest" time="0.001"/>
+  <testcase name="testCreate()" classname="com.testevr.testejava.cliente.domain.service.ClienteServiceTest" time="0.001"/>
+  <testcase name="testDelete()" classname="com.testevr.testejava.cliente.domain.service.ClienteServiceTest" time="0.002"/>
+  <testcase name="testUpdate()" classname="com.testevr.testejava.cliente.domain.service.ClienteServiceTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

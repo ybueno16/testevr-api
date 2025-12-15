@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.testevr.testejava.cliente.domain.valueobject.RazaoSocialTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2025-12-15T23:52:06.155Z" hostname="yuri-bueno" time="0.011">
+  <properties/>
+  <testcase name="testToStringENullEquals()" classname="com.testevr.testejava.cliente.domain.valueobject.RazaoSocialTest" time="0.0"/>
+  <testcase name="testRazaoSocialNulaOuVazia()" classname="com.testevr.testejava.cliente.domain.valueobject.RazaoSocialTest" time="0.001"/>
+  <testcase name="testRazaoSocialValida()" classname="com.testevr.testejava.cliente.domain.valueobject.RazaoSocialTest" time="0.001"/>
+  <testcase name="testEqualsAndHashCode()" classname="com.testevr.testejava.cliente.domain.valueobject.RazaoSocialTest" time="0.001"/>
+  <testcase name="testRazaoSocialMuitoCurta()" classname="com.testevr.testejava.cliente.domain.valueobject.RazaoSocialTest" time="0.001"/>
+  <testcase name="testRazaoSocialMuitoLonga()" classname="com.testevr.testejava.cliente.domain.valueobject.RazaoSocialTest" time="0.005"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

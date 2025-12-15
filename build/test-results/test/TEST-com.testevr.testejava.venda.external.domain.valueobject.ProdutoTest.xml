@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.testevr.testejava.venda.external.domain.valueobject.ProdutoTest" tests="31" skipped="0" failures="0" errors="0" timestamp="2025-12-15T23:52:07.440Z" hostname="yuri-bueno" time="0.122">
+  <properties/>
+  <testcase name="testCreateValidProdutoWithSpaces()" classname="com.testevr.testejava.venda.external.domain.valueobject.ProdutoTest" time="0.003"/>
+  <testcase name="testLargeValues()" classname="com.testevr.testejava.venda.external.domain.valueobject.ProdutoTest" time="0.001"/>
+  <testcase name="testUltimaAtualizacaoDifferentFormats()" classname="com.testevr.testejava.venda.external.domain.valueobject.ProdutoTest" time="0.001"/>
+  <testcase name="testCreateProdutoWhitespaceDescricao()" classname="com.testevr.testejava.venda.external.domain.valueobject.ProdutoTest" time="0.001"/>
+  <testcase name="testDifferentUnidades()" classname="com.testevr.testejava.venda.external.domain.valueobject.ProdutoTest" time="0.001"/>
+  <testcase name="testCreateProdutoNullEstoque()" classname="com.testevr.testejava.venda.external.domain.valueobject.ProdutoTest" time="0.001"/>
+  <testcase name="testCreateValidProdutoWithUnidadeSpaces()" classname="com.testevr.testejava.venda.external.domain.valueobject.ProdutoTest" time="0.001"/>
+  <testcase name="testToString()" classname="com.testevr.testejava.venda.external.domain.valueobject.ProdutoTest" time="0.001"/>
+  <testcase name="testCreateValidProduto()" classname="com.testevr.testejava.venda.external.domain.valueobject.ProdutoTest" time="0.0"/>
+  <testcase name="testCreateProdutoNegativeEstoque()" classname="com.testevr.testejava.venda.external.domain.valueobject.ProdutoTest" time="0.001"/>
+  <testcase name="testGetDescricaoTrimmed()" classname="com.testevr.testejava.venda.external.domain.valueobject.ProdutoTest" time="0.001"/>
+  <testcase name="testEqualsDifferentClass()" classname="com.testevr.testejava.venda.external.domain.valueobject.ProdutoTest" time="0.0"/>
+  <testcase name="testGetters()" classname="com.testevr.testejava.venda.external.domain.valueobject.ProdutoTest" time="0.0"/>
+  <testcase name="testCreateProdutoNullDescricao()" classname="com.testevr.testejava.venda.external.domain.valueobject.ProdutoTest" time="0.001"/>
+  <testcase name="testGetUnidadeTrimmed()" classname="com.testevr.testejava.venda.external.domain.valueobject.ProdutoTest" time="0.001"/>
+  <testcase name="testToStringNullValues()" classname="com.testevr.testejava.venda.external.domain.valueobject.ProdutoTest" time="0.0"/>
+  <testcase name="testCreateProdutoNullPreco()" classname="com.testevr.testejava.venda.external.domain.valueobject.ProdutoTest" time="0.0"/>
+  <testcase name="testCreateProdutoNegativePreco()" classname="com.testevr.testejava.venda.external.domain.valueobject.ProdutoTest" time="0.0"/>
+  <testcase name="[1] descricao = &quot;Produto com acentuação çãõé&quot;" classname="com.testevr.testejava.venda.external.domain.valueobject.ProdutoTest" time="0.01"/>
+  <testcase name="[2] descricao = &quot;Produto &amp; Cia Ltda.&quot;" classname="com.testevr.testejava.venda.external.domain.valueobject.ProdutoTest" time="0.001"/>
+  <testcase name="[3] descricao = &quot;Produto 123 Teste&quot;" classname="com.testevr.testejava.venda.external.domain.valueobject.ProdutoTest" time="0.0"/>
+  <testcase name="[4] descricao = &quot;Produto Especial!@#$%&quot;" classname="com.testevr.testejava.venda.external.domain.valueobject.ProdutoTest" time="0.0"/>
+  <testcase name="testEqualsSameObject()" classname="com.testevr.testejava.venda.external.domain.valueobject.ProdutoTest" time="0.0"/>
+  <testcase name="testHashCode()" classname="com.testevr.testejava.venda.external.domain.valueobject.ProdutoTest" time="0.0"/>
+  <testcase name="testCreateProdutoEmptyDescricao()" classname="com.testevr.testejava.venda.external.domain.valueobject.ProdutoTest" time="0.001"/>
+  <testcase name="testCreateValidProdutoWithNullUnidade()" classname="com.testevr.testejava.venda.external.domain.valueobject.ProdutoTest" time="0.0"/>
+  <testcase name="testEquals()" classname="com.testevr.testejava.venda.external.domain.valueobject.ProdutoTest" time="0.0"/>
+  <testcase name="testCreateValidProdutoZeroPreco()" classname="com.testevr.testejava.venda.external.domain.valueobject.ProdutoTest" time="0.001"/>
+  <testcase name="testCreateValidProdutoZeroEstoque()" classname="com.testevr.testejava.venda.external.domain.valueobject.ProdutoTest" time="0.001"/>
+  <testcase name="testPrecoPrecisao()" classname="com.testevr.testejava.venda.external.domain.valueobject.ProdutoTest" time="0.003"/>
+  <testcase name="testEqualsWithNull()" classname="com.testevr.testejava.venda.external.domain.valueobject.ProdutoTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,4 +1,4 @@
-package com.testevr.testejava.cliente.infra.config;
+package com.testevr.testejava.shared.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

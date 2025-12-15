@@ -2,7 +2,6 @@ package com.testevr.testejava.venda.internal.infra.external;
 
 import com.testevr.testejava.venda.internal.application.dto.VendaExternaRequest;
 import com.testevr.testejava.venda.internal.application.dto.VendaExternaResponse;
-import com.testevr.testejava.venda.internal.domain.service.VendaExternaService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -13,7 +12,7 @@ import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 @Service
-public class VendaExternaServiceImpl implements VendaExternaService {
+public class VendaExternaServiceImpl {
 
     private final RestTemplate restTemplate;
 
@@ -24,7 +23,6 @@ public class VendaExternaServiceImpl implements VendaExternaService {
         this.restTemplate = restTemplate;
     }
 
-    @Override
     public VendaExternaResponse processarVenda(VendaExternaRequest request) {
         try {
             HttpHeaders headers = new HttpHeaders();

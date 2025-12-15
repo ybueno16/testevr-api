@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.testevr.testejava.venda.internal.domain.entity.VendaTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2025-12-15T23:52:07.690Z" hostname="yuri-bueno" time="0.012">
+  <properties/>
+  <testcase name="deveRetornarStringFormatada()" classname="com.testevr.testejava.venda.internal.domain.entity.VendaTest" time="0.002"/>
+  <testcase name="deveCompararVendasPeloId()" classname="com.testevr.testejava.venda.internal.domain.entity.VendaTest" time="0.001"/>
+  <testcase name="deveCriarVendaComId()" classname="com.testevr.testejava.venda.internal.domain.entity.VendaTest" time="0.001"/>
+  <testcase name="deveAtualizarId()" classname="com.testevr.testejava.venda.internal.domain.entity.VendaTest" time="0.001"/>
+  <testcase name="deveRetornarIdObjetoQuandoIdExiste()" classname="com.testevr.testejava.venda.internal.domain.entity.VendaTest" time="0.001"/>
+  <testcase name="deveCriarVendaComStatusPersonalizado()" classname="com.testevr.testejava.venda.internal.domain.entity.VendaTest" time="0.001"/>
+  <testcase name="deveCriarVendaComIdNulo()" classname="com.testevr.testejava.venda.internal.domain.entity.VendaTest" time="0.001"/>
+  <testcase name="deveCriarVendaComDatasPersonalizadas()" classname="com.testevr.testejava.venda.internal.domain.entity.VendaTest" time="0.001"/>
+  <testcase name="deveRetornarNullParaIdQuandoIdNulo()" classname="com.testevr.testejava.venda.internal.domain.entity.VendaTest" time="0.001"/>
+  <testcase name="deveAtualizarStatus()" classname="com.testevr.testejava.venda.internal.domain.entity.VendaTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

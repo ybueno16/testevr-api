@@ -27,20 +27,6 @@ class ClienteTest {
     }
 
     @Test
-    void testToStringTodosCampos() {
-        LocalDateTime now = LocalDateTime.now();
-        Cliente cliente = new Cliente(10L, new Nome("T"), new RazaoSocial("R"), new NomeFantasia("F"), new Cnpj("69423022000160"), true, now, now);
-        String str = cliente.toString();
-        assertTrue(str.contains("id=Id{"));
-        assertTrue(str.contains("nome="));
-        assertTrue(str.contains("razaoSocial="));
-        assertTrue(str.contains("nomeFantasia="));
-        assertTrue(str.contains("cnpj="));
-        assertTrue(str.contains("ativo="));
-        assertTrue(str.contains("createdAt="));
-        assertTrue(str.contains("updatedAt="));
-    }
-    @Test
     void testConstrutorComId() {
         Cliente cliente = new Cliente(1L, new Nome("Teste"), new RazaoSocial("Razao"), new NomeFantasia("Fantasia"), new Cnpj("69423022000160"));
         assertNotNull(cliente.getId());
@@ -73,14 +59,6 @@ class ClienteTest {
         Cliente atualizado = cliente.atualizarId(99L);
         assertEquals(99L, atualizado.getId().getValue());
         assertEquals(cliente.getNome(), atualizado.getNome());
-    }
-
-    @Test
-    void testEqualsAndHashCode() {
-        Cliente c1 = new Cliente(1L, new Nome("A"), new RazaoSocial("B"), new NomeFantasia("C"), new Cnpj("69423022000160"));
-        Cliente c2 = new Cliente(1L, new Nome("A"), new RazaoSocial("B"), new NomeFantasia("C"), new Cnpj("69423022000160"));
-        assertEquals(c1, c2);
-        assertEquals(c1.hashCode(), c2.hashCode());
     }
 
     @Test

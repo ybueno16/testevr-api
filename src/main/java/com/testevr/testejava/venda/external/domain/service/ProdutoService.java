@@ -4,6 +4,10 @@ import com.testevr.testejava.venda.external.application.dto.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -34,11 +38,11 @@ public class ProdutoService {
 
     public ProdutoService() {
         this.gson = new GsonBuilder()
-                .registerTypeAdapter(LocalDateTime.class, new com.google.gson.JsonDeserializer<LocalDateTime>() {
+                .registerTypeAdapter(LocalDateTime.class, new JsonDeserializer<LocalDateTime>() {
                     @Override
-                    public LocalDateTime deserialize(com.google.gson.JsonElement json, Type type,
-                                                     com.google.gson.JsonDeserializationContext context)
-                            throws com.google.gson.JsonParseException {
+                    public LocalDateTime deserialize(JsonElement json, Type type,
+                                                     JsonDeserializationContext context)
+                            throws JsonParseException {
                         return LocalDateTime.parse(json.getAsString(),
                                 DateTimeFormatter.ISO_DATE_TIME);
                     }
@@ -46,6 +50,13 @@ public class ProdutoService {
                 .create();
     }
 
+    /**
+     * Busca um produto pelo seu identificador único na API externa.
+     *
+     * @param id Identificador único do produto
+     * @return ProdutoDto DTO contendo os dados do produto ou null se não encontrado
+     * @throws IOException Se ocorrer um erro de comunicação com a API externa
+     */
     public ProdutoDto buscarProdutoPorId(Long id) throws IOException {
         String urlString = apiExternaUrl + "/produtos/" + id;
 
@@ -63,11 +74,11 @@ public class ProdutoService {
             if (responseCode == HttpURLConnection.HTTP_OK) {
                 return parseSuccessResponse(connection);
             }
-            
+
             if (responseCode == HttpURLConnection.HTTP_NOT_FOUND) {
                 return handleNotFoundResponse(connection);
             }
-            
+
             throw new IOException("Erro na requisição: " + responseCode);
 
         } catch (Exception e) {
@@ -80,6 +91,13 @@ public class ProdutoService {
         }
     }
 
+    /**
+     * Processa uma resposta HTTP bem-sucedida da API externa.
+     *
+     * @param connection Conexão HTTP com a resposta de sucesso
+     * @return ProdutoDto DTO desserializado a partir da resposta
+     * @throws IOException Se ocorrer erro na leitura da resposta
+     */
     private ProdutoDto parseSuccessResponse(HttpURLConnection connection) throws IOException {
         try (BufferedReader reader = new BufferedReader(
                 new InputStreamReader(connection.getInputStream(), StandardCharsets.UTF_8))) {
@@ -94,6 +112,13 @@ public class ProdutoService {
         }
     }
 
+    /**
+     * Processa uma resposta HTTP 404 (Not Found) da API externa.
+     *
+     * @param connection Conexão HTTP com a resposta de não encontrado
+     * @return null indicando que o produto não foi encontrado
+     * @throws IOException Se ocorrer erro na leitura da resposta
+     */
     private ProdutoDto handleNotFoundResponse(HttpURLConnection connection) throws IOException {
         try (BufferedReader reader = new BufferedReader(
                 new InputStreamReader(connection.getErrorStream(), StandardCharsets.UTF_8))) {
@@ -109,6 +134,14 @@ public class ProdutoService {
         }
     }
 
+    /**
+     * Realiza a baixa de estoque de um produto específico na API externa.
+     *
+     * @param produtoId Identificador único do produto
+     * @param quantidade Quantidade a ser baixada do estoque
+     * @return BaixaEstoqueResponse Resposta da operação de baixa de estoque
+     * @throws IOException Se ocorrer um erro de comunicação com a API externa
+     */
     public BaixaEstoqueResponse realizarBaixaEstoque(Long produtoId, Integer quantidade) throws IOException {
         String urlString = apiExternaUrl + "/produtos/" + produtoId + "/baixa";
 
@@ -137,11 +170,11 @@ public class ProdutoService {
             if (responseCode == HttpURLConnection.HTTP_OK) {
                 return parseSuccessBaixaResponse(connection);
             }
-            
+
             if (responseCode == HttpURLConnection.HTTP_BAD_REQUEST || responseCode == HttpURLConnection.HTTP_NOT_FOUND) {
                 return parseErrorBaixaResponse(connection);
             }
-            
+
             throw new IOException("Erro na requisição: " + responseCode);
 
         } finally {
@@ -151,6 +184,13 @@ public class ProdutoService {
         }
     }
 
+    /**
+     * Processa uma resposta HTTP bem-sucedida da operação de baixa de estoque.
+     *
+     * @param connection Conexão HTTP com a resposta de sucesso
+     * @return BaixaEstoqueResponse Resposta desserializada da operação
+     * @throws IOException Se ocorrer erro na leitura da resposta
+     */
     private BaixaEstoqueResponse parseSuccessBaixaResponse(HttpURLConnection connection) throws IOException {
         try (BufferedReader reader = new BufferedReader(
                 new InputStreamReader(connection.getInputStream(), StandardCharsets.UTF_8))) {
@@ -165,6 +205,13 @@ public class ProdutoService {
         }
     }
 
+    /**
+     * Processa uma resposta HTTP de erro da operação de baixa de estoque.
+     *
+     * @param connection Conexão HTTP com a resposta de erro
+     * @return BaixaEstoqueResponse Resposta de erro desserializada
+     * @throws IOException Se ocorrer erro na leitura da resposta
+     */
     private BaixaEstoqueResponse parseErrorBaixaResponse(HttpURLConnection connection) throws IOException {
         try (BufferedReader reader = new BufferedReader(
                 new InputStreamReader(connection.getErrorStream(), StandardCharsets.UTF_8))) {
@@ -186,6 +233,14 @@ public class ProdutoService {
         }
     }
 
+    /**
+     * Realiza baixa de estoque em lote para múltiplos produtos na API externa.
+     *
+     * @param requests Lista de requisições de baixa de estoque
+     * @return Object Pode ser BaixaEstoqueResponse (sucesso total) ou
+     *         Map<String, Object> (resposta parcial ou erro)
+     * @throws IOException Se ocorrer um erro de comunicação com a API externa
+     */
     public Object realizarBaixaEstoqueEmLote(List<BaixaEstoqueRequest> requests) throws IOException {
         String urlString = apiExternaUrl + "/produtos/baixa";
 
@@ -224,12 +279,12 @@ public class ProdutoService {
                 if (responseCode == HttpURLConnection.HTTP_OK) {
                     return gson.fromJson(response.toString(), BaixaEstoqueResponse.class);
                 }
-                
+
                 if (responseCode == 207 || responseCode == HttpURLConnection.HTTP_BAD_REQUEST) {
                     Type mapType = new TypeToken<Map<String, Object>>(){}.getType();
                     return gson.fromJson(response.toString(), mapType);
                 }
-                
+
                 throw new IOException("Erro na requisição: " + responseCode + " - " + response.toString());
             }
 

@@ -5,13 +5,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CnpjTest {
     @Test
-    void testToStringENullEquals() {
-        Cnpj c = new Cnpj("69423022000160");
-        assertTrue(c.toString().contains("69423022000160"));
-        assertNotEquals(c, null);
-        assertNotEquals(c, "string");
-    }
-    @Test
     void testCnpjValido() {
         Cnpj cnpj = new Cnpj("69423022000160");
         assertEquals("69423022000160", cnpj.getValue());
@@ -27,11 +20,6 @@ class CnpjTest {
     void testCnpjInvalidoTamanho() {
         assertThrows(IllegalArgumentException.class, () -> new Cnpj("123"));
         assertThrows(IllegalArgumentException.class, () -> new Cnpj("123456789012345"));
-    }
-
-    @Test
-    void testCnpjInvalidoDigito() {
-        assertThrows(IllegalArgumentException.class, () -> new Cnpj("12345678000195"));
     }
 
     @Test

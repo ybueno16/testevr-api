@@ -1,6 +1,5 @@
 package com.testevr.testejava.shared.infra.web;
 
-import com.testevr.testejava.cliente.infra.config.responseEntity.DefaultResponseEntityFactory;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

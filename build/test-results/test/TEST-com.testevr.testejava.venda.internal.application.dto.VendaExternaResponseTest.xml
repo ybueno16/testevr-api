@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.testevr.testejava.venda.internal.application.dto.VendaExternaResponseTest" tests="23" skipped="0" failures="0" errors="0" timestamp="2025-12-14T20:49:32.466Z" hostname="yuri-bueno" time="0.114">
+<testsuite name="com.testevr.testejava.venda.internal.application.dto.VendaExternaResponseTest" tests="23" skipped="0" failures="0" errors="0" timestamp="2025-12-15T23:52:07.683Z" hostname="yuri-bueno" time="0.006">
   <properties/>
-  <testcase name="testSpecialCharacters()" classname="com.testevr.testejava.venda.internal.application.dto.VendaExternaResponseTest" time="0.04"/>
-  <testcase name="testLongMensagem()" classname="com.testevr.testejava.venda.internal.application.dto.VendaExternaResponseTest" time="0.008"/>
-  <testcase name="testIsSucesso()" classname="com.testevr.testejava.venda.internal.application.dto.VendaExternaResponseTest" time="0.003"/>
-  <testcase name="testEmptyMensagem()" classname="com.testevr.testejava.venda.internal.application.dto.VendaExternaResponseTest" time="0.003"/>
-  <testcase name="testCombinacoesSucesso()" classname="com.testevr.testejava.venda.internal.application.dto.VendaExternaResponseTest" time="0.002"/>
-  <testcase name="testNoArgsConstructor()" classname="com.testevr.testejava.venda.internal.application.dto.VendaExternaResponseTest" time="0.002"/>
-  <testcase name="testEstadoInicial()" classname="com.testevr.testejava.venda.internal.application.dto.VendaExternaResponseTest" time="0.002"/>
-  <testcase name="testSettersAndGetters()" classname="com.testevr.testejava.venda.internal.application.dto.VendaExternaResponseTest" time="0.002"/>
-  <testcase name="testSucessoFalse()" classname="com.testevr.testejava.venda.internal.application.dto.VendaExternaResponseTest" time="0.001"/>
-  <testcase name="testCodigoTransacaoNumerico()" classname="com.testevr.testejava.venda.internal.application.dto.VendaExternaResponseTest" time="0.002"/>
-  <testcase name="testMultipleInstances()" classname="com.testevr.testejava.venda.internal.application.dto.VendaExternaResponseTest" time="0.002"/>
-  <testcase name="testUpdateValues()" classname="com.testevr.testejava.venda.internal.application.dto.VendaExternaResponseTest" time="0.002"/>
-  <testcase name="testGetCodigoTransacao()" classname="com.testevr.testejava.venda.internal.application.dto.VendaExternaResponseTest" time="0.002"/>
+  <testcase name="testSpecialCharacters()" classname="com.testevr.testejava.venda.internal.application.dto.VendaExternaResponseTest" time="0.0"/>
+  <testcase name="testLongMensagem()" classname="com.testevr.testejava.venda.internal.application.dto.VendaExternaResponseTest" time="0.0"/>
+  <testcase name="testIsSucesso()" classname="com.testevr.testejava.venda.internal.application.dto.VendaExternaResponseTest" time="0.0"/>
+  <testcase name="testEmptyMensagem()" classname="com.testevr.testejava.venda.internal.application.dto.VendaExternaResponseTest" time="0.0"/>
+  <testcase name="testCombinacoesSucesso()" classname="com.testevr.testejava.venda.internal.application.dto.VendaExternaResponseTest" time="0.001"/>
+  <testcase name="testNoArgsConstructor()" classname="com.testevr.testejava.venda.internal.application.dto.VendaExternaResponseTest" time="0.0"/>
+  <testcase name="testEstadoInicial()" classname="com.testevr.testejava.venda.internal.application.dto.VendaExternaResponseTest" time="0.0"/>
+  <testcase name="testSettersAndGetters()" classname="com.testevr.testejava.venda.internal.application.dto.VendaExternaResponseTest" time="0.001"/>
+  <testcase name="testSucessoFalse()" classname="com.testevr.testejava.venda.internal.application.dto.VendaExternaResponseTest" time="0.0"/>
+  <testcase name="testCodigoTransacaoNumerico()" classname="com.testevr.testejava.venda.internal.application.dto.VendaExternaResponseTest" time="0.001"/>
+  <testcase name="testMultipleInstances()" classname="com.testevr.testejava.venda.internal.application.dto.VendaExternaResponseTest" time="0.0"/>
+  <testcase name="testUpdateValues()" classname="com.testevr.testejava.venda.internal.application.dto.VendaExternaResponseTest" time="0.0"/>
+  <testcase name="testGetCodigoTransacao()" classname="com.testevr.testejava.venda.internal.application.dto.VendaExternaResponseTest" time="0.0"/>
   <testcase name="testEmptyCodigoTransacao()" classname="com.testevr.testejava.venda.internal.application.dto.VendaExternaResponseTest" time="0.001"/>
-  <testcase name="testSetSucesso()" classname="com.testevr.testejava.venda.internal.application.dto.VendaExternaResponseTest" time="0.002"/>
-  <testcase name="testAllArgsConstructor()" classname="com.testevr.testejava.venda.internal.application.dto.VendaExternaResponseTest" time="0.002"/>
-  <testcase name="testSetMensagem()" classname="com.testevr.testejava.venda.internal.application.dto.VendaExternaResponseTest" time="0.002"/>
-  <testcase name="testGetMensagem()" classname="com.testevr.testejava.venda.internal.application.dto.VendaExternaResponseTest" time="0.001"/>
-  <testcase name="testSetCodigoTransacao()" classname="com.testevr.testejava.venda.internal.application.dto.VendaExternaResponseTest" time="0.002"/>
-  <testcase name="testNullValues()" classname="com.testevr.testejava.venda.internal.application.dto.VendaExternaResponseTest" time="0.001"/>
-  <testcase name="testLongCodigoTransacao()" classname="com.testevr.testejava.venda.internal.application.dto.VendaExternaResponseTest" time="0.002"/>
-  <testcase name="testCodigoTransacaoComLetrasENumeros()" classname="com.testevr.testejava.venda.internal.application.dto.VendaExternaResponseTest" time="0.001"/>
+  <testcase name="testSetSucesso()" classname="com.testevr.testejava.venda.internal.application.dto.VendaExternaResponseTest" time="0.0"/>
+  <testcase name="testAllArgsConstructor()" classname="com.testevr.testejava.venda.internal.application.dto.VendaExternaResponseTest" time="0.0"/>
+  <testcase name="testSetMensagem()" classname="com.testevr.testejava.venda.internal.application.dto.VendaExternaResponseTest" time="0.0"/>
+  <testcase name="testGetMensagem()" classname="com.testevr.testejava.venda.internal.application.dto.VendaExternaResponseTest" time="0.0"/>
+  <testcase name="testSetCodigoTransacao()" classname="com.testevr.testejava.venda.internal.application.dto.VendaExternaResponseTest" time="0.0"/>
+  <testcase name="testNullValues()" classname="com.testevr.testejava.venda.internal.application.dto.VendaExternaResponseTest" time="0.0"/>
+  <testcase name="testLongCodigoTransacao()" classname="com.testevr.testejava.venda.internal.application.dto.VendaExternaResponseTest" time="0.0"/>
+  <testcase name="testCodigoTransacaoComLetrasENumeros()" classname="com.testevr.testejava.venda.internal.application.dto.VendaExternaResponseTest" time="0.0"/>
   <testcase name="testWhitespaceValues()" classname="com.testevr.testejava.venda.internal.application.dto.VendaExternaResponseTest" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>

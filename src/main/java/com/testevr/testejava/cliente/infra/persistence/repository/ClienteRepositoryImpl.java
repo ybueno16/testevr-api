@@ -14,10 +14,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Repository implementation using pure JDBC (no ORM)
- * Direct usage of Connection, PreparedStatement, and ResultSet
- */
 @Repository
 public class ClienteRepositoryImpl implements ClienteRepository {
 
@@ -27,10 +23,18 @@ public class ClienteRepositoryImpl implements ClienteRepository {
         this.dataSource = dataSource;
     }
 
+    /**
+     * Cria um novo registro de cliente no banco de dados.
+     * Utiliza a funcionalidade RETURNING do PostgreSQL para obter o ID gerado.
+     *
+     * @param cliente Objeto Cliente contendo os dados a serem persistidos
+     * @return Cliente O cliente criado com o ID gerado pelo banco de dados
+     * @throws RuntimeException Se ocorrer um erro SQL ou se o ID não for retornado
+     */
     @Override
     public Cliente create(Cliente cliente) {
         String sql = "INSERT INTO cliente (nome, razao_social, nome_fantasia, cnpj, ativo, created_at, updated_at) " +
-                     "VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING id";
+                "VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING id";
 
         try (Connection conn = dataSource.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -47,14 +51,14 @@ public class ClienteRepositoryImpl implements ClienteRepository {
                 if (rs.next()) {
                     Long id = rs.getLong("id");
                     return new Cliente(
-                        id,
-                        cliente.getNome(),
-                        cliente.getRazaoSocial(),
-                        cliente.getNomeFantasia(),
-                        cliente.getCnpj(),
-                        cliente.isAtivo(),
-                        cliente.getCreatedAt(),
-                        cliente.getUpdatedAt()
+                            id,
+                            cliente.getNome(),
+                            cliente.getRazaoSocial(),
+                            cliente.getNomeFantasia(),
+                            cliente.getCnpj(),
+                            cliente.isAtivo(),
+                            cliente.getCreatedAt(),
+                            cliente.getUpdatedAt()
                     );
                 }
             }
@@ -65,10 +69,17 @@ public class ClienteRepositoryImpl implements ClienteRepository {
         throw new RuntimeException("Erro ao criar cliente");
     }
 
+    /**
+     * Atualiza um registro de cliente existente no banco de dados.
+     *
+     * @param cliente Objeto Cliente com os dados atualizados
+     * @return Cliente O cliente atualizado
+     * @throws RuntimeException Se ocorrer um erro SQL ou se o cliente não for encontrado
+     */
     @Override
     public Cliente update(Cliente cliente) {
         String sql = "UPDATE cliente SET nome = ?, razao_social = ?, nome_fantasia = ?, " +
-                     "cnpj = ?, ativo = ?, updated_at = ? WHERE id = ?";
+                "cnpj = ?, ativo = ?, updated_at = ? WHERE id = ?";
 
         try (Connection conn = dataSource.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -92,6 +103,13 @@ public class ClienteRepositoryImpl implements ClienteRepository {
         throw new RuntimeException("Cliente não encontrado para atualização");
     }
 
+    /**
+     * Busca um cliente pelo seu identificador único.
+     *
+     * @param id Identificador único do cliente
+     * @return Cliente O cliente encontrado ou null caso não exista
+     * @throws RuntimeException Se ocorrer um erro SQL durante a consulta
+     */
     @Override
     public Cliente findById(Long id) {
         String sql = "SELECT * FROM cliente WHERE id = ?";
@@ -113,10 +131,16 @@ public class ClienteRepositoryImpl implements ClienteRepository {
         return null;
     }
 
+    /**
+     * Retorna todos os clientes cadastrados no banco de dados, ordenados por ID.
+     *
+     * @return List<Cliente> Lista contendo todos os clientes
+     * @throws RuntimeException Se ocorrer um erro SQL durante a consulta
+     */
     @Override
     public List<Cliente> findAll() {
         String sql = "SELECT * FROM cliente ORDER BY id";
-        
+
         List<Cliente> clientes = new ArrayList<>();
 
         try (Connection conn = dataSource.getConnection();
@@ -134,6 +158,12 @@ public class ClienteRepositoryImpl implements ClienteRepository {
         return clientes;
     }
 
+    /**
+     * Remove um cliente do banco de dados com base no seu identificador único.
+     *
+     * @param id Identificador único do cliente a ser removido
+     * @throws RuntimeException Se ocorrer um erro SQL durante a exclusão
+     */
     @Override
     public void delete(Long id) {
         String sql = "DELETE FROM cliente WHERE id = ?";
@@ -149,6 +179,15 @@ public class ClienteRepositoryImpl implements ClienteRepository {
         }
     }
 
+    /**
+     * Método auxiliar para mapear uma linha do ResultSet para um objeto Cliente.
+     * Converte os dados do banco de dados em objetos de valor (Value Objects) e cria
+     * uma instância de Cliente.
+     *
+     * @param rs ResultSet posicionado na linha atual a ser mapeada
+     * @return Cliente Objeto Cliente populado com os dados do ResultSet
+     * @throws SQLException Se ocorrer um erro ao acessar os dados do ResultSet
+     */
     private Cliente mapRowToCliente(ResultSet rs) throws SQLException {
         Long id = rs.getLong("id");
         String nome = rs.getString("nome");

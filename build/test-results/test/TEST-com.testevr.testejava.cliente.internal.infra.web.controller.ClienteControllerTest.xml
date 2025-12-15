@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.testevr.testejava.cliente.internal.infra.web.controller.ClienteControllerTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2025-12-15T23:52:06.749Z" hostname="yuri-bueno" time="0.237">
+  <properties/>
+  <testcase name="testCriarCliente()" classname="com.testevr.testejava.cliente.internal.infra.web.controller.ClienteControllerTest" time="0.173"/>
+  <testcase name="testBuscarPorIdFound()" classname="com.testevr.testejava.cliente.internal.infra.web.controller.ClienteControllerTest" time="0.008"/>
+  <testcase name="testBuscarTodos()" classname="com.testevr.testejava.cliente.internal.infra.web.controller.ClienteControllerTest" time="0.011"/>
+  <testcase name="testAtualizarClienteFound()" classname="com.testevr.testejava.cliente.internal.infra.web.controller.ClienteControllerTest" time="0.013"/>
+  <testcase name="testDeletar()" classname="com.testevr.testejava.cliente.internal.infra.web.controller.ClienteControllerTest" time="0.007"/>
+  <testcase name="testAtualizarClienteNotFound()" classname="com.testevr.testejava.cliente.internal.infra.web.controller.ClienteControllerTest" time="0.009"/>
+  <testcase name="testBuscarPorIdNotFound()" classname="com.testevr.testejava.cliente.internal.infra.web.controller.ClienteControllerTest" time="0.008"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
