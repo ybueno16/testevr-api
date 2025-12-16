@@ -8,8 +8,6 @@ import com.testevr.testejava.cliente.domain.valueobject.NomeFantasia;
 import com.testevr.testejava.cliente.domain.valueobject.RazaoSocial;
 import org.springframework.stereotype.Component;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.time.LocalDateTime;
 
 @Component

@@ -220,19 +220,15 @@ class VendaExternaResponseTest {
 
     @Test
     void testCombinacoesSucesso() {
-        // Sucesso com código
         VendaExternaResponse response1 = new VendaExternaResponse(true, "OK", "CODE001");
         assertTrue(response1.isSucesso());
 
-        // Sucesso sem código
         VendaExternaResponse response2 = new VendaExternaResponse(true, "OK", null);
         assertTrue(response2.isSucesso());
 
-        // Falha com código
         VendaExternaResponse response3 = new VendaExternaResponse(false, "Erro", "ERR001");
         assertFalse(response3.isSucesso());
 
-        // Falha sem código
         VendaExternaResponse response4 = new VendaExternaResponse(false, "Erro", null);
         assertFalse(response4.isSucesso());
     }

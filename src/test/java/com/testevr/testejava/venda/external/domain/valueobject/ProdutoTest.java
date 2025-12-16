@@ -167,7 +167,7 @@ class ProdutoTest {
 
         assertEquals(produto1, produto2);
         assertNotEquals(produto1, produto3);
-        assertEquals(produto1, produto4); // Mesmo ID, então são iguais
+        assertEquals(produto1, produto4);
         assertEquals(produto1.hashCode(), produto2.hashCode());
         assertNotEquals(produto1.hashCode(), produto3.hashCode());
     }
