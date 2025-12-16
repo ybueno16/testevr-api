@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.testevr.testejava.TestejavaApplicationTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-12-15T23:52:05.572Z" hostname="yuri-bueno" time="0.014">
+<testsuite name="com.testevr.testejava.TestejavaApplicationTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-12-16T13:20:30.520Z" hostname="yuri-bueno" time="2.145">
   <properties/>
-  <testcase name="contextLoads()" classname="com.testevr.testejava.TestejavaApplicationTests" time="0.014"/>
-  <system-out><![CDATA[20:51:56.501 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.testevr.testejava.TestejavaApplicationTests]: TestejavaApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-20:51:56.811 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.testevr.testejava.TestejavaApplication for test class com.testevr.testejava.TestejavaApplicationTests
+  <testcase name="contextLoads()" classname="com.testevr.testejava.TestejavaApplicationTests" time="2.145"/>
+  <system-out><![CDATA[10:20:18.911 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.testevr.testejava.TestejavaApplicationTests]: TestejavaApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+10:20:19.747 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.testevr.testejava.TestejavaApplication for test class com.testevr.testejava.TestejavaApplicationTests
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -14,13 +14,18 @@
 
  :: Spring Boot ::                (v4.0.0)
 
-2025-12-15T20:51:57.532-03:00  INFO 68673 --- [testejava] [    Test worker] c.t.testejava.TestejavaApplicationTests  : Starting TestejavaApplicationTests using Java 25.0.1 with PID 68673 (started by yuri-bueno in /home/yuri-bueno/Documentos/dev/java/testevr-api)
-2025-12-15T20:51:57.533-03:00  INFO 68673 --- [testejava] [    Test worker] c.t.testejava.TestejavaApplicationTests  : No active profile set, falling back to 1 default profile: "default"
-2025-12-15T20:52:04.993-03:00  INFO 68673 --- [testejava] [    Test worker] org.flywaydb.core.FlywayExecutor         : Database: jdbc:postgresql://localhost:5432/testevr (PostgreSQL 16.10)
-2025-12-15T20:52:05.141-03:00  INFO 68673 --- [testejava] [    Test worker] o.f.core.internal.command.DbValidate     : Successfully validated 2 migrations (execution time 00:00.101s)
-2025-12-15T20:52:05.288-03:00  INFO 68673 --- [testejava] [    Test worker] o.f.core.internal.command.DbMigrate      : Current version of schema "public": 2
-2025-12-15T20:52:05.294-03:00  INFO 68673 --- [testejava] [    Test worker] o.f.core.internal.command.DbMigrate      : Schema "public" is up to date. No migration necessary.
-2025-12-15T20:52:05.550-03:00  INFO 68673 --- [testejava] [    Test worker] c.t.testejava.TestejavaApplicationTests  : Started TestejavaApplicationTests in 8.464 seconds (process running for 20.794)
+2025-12-16T10:20:20.939-03:00  INFO 74607 --- [testejava] [    Test worker] c.t.testejava.TestejavaApplicationTests  : Starting TestejavaApplicationTests using Java 25.0.1 with PID 74607 (started by yuri-bueno in /home/yuri-bueno/Documentos/dev/java/testevr-api)
+2025-12-16T10:20:20.942-03:00  INFO 74607 --- [testejava] [    Test worker] c.t.testejava.TestejavaApplicationTests  : No active profile set, falling back to 1 default profile: "default"
+2025-12-16T10:20:29.558-03:00  INFO 74607 --- [testejava] [    Test worker] org.flywaydb.core.FlywayExecutor         : Database: jdbc:postgresql://localhost:5432/testevr (PostgreSQL 16.10)
+2025-12-16T10:20:29.793-03:00  INFO 74607 --- [testejava] [    Test worker] o.f.core.internal.command.DbValidate     : Successfully validated 2 migrations (execution time 00:00.080s)
+2025-12-16T10:20:29.896-03:00  INFO 74607 --- [testejava] [    Test worker] o.f.core.internal.command.DbMigrate      : Current version of schema "public": 2
+2025-12-16T10:20:29.902-03:00  INFO 74607 --- [testejava] [    Test worker] o.f.core.internal.command.DbMigrate      : Schema "public" is up to date. No migration necessary.
+2025-12-16T10:20:30.485-03:00  INFO 74607 --- [testejava] [    Test worker] c.t.testejava.TestejavaApplicationTests  : Started TestejavaApplicationTests in 10.191 seconds (process running for 20.886)
 ]]></system-out>
-  <system-err><![CDATA[]]></system-err>
+  <system-err><![CDATA[Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build as described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org.mockito/org/mockito/Mockito.html#0.3
+WARNING: A Java agent has been loaded dynamically (/home/yuri-bueno/.gradle/caches/modules-2/files-2.1/net.bytebuddy/byte-buddy-agent/1.17.8/f09415827a71be7ed621c7bd02550678f28bc81c/byte-buddy-agent-1.17.8.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+]]></system-err>
 </testsuite>

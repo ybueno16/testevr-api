@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.testevr.testejava.venda.internal.application.dto.CriarVendaDtoTest" tests="24" skipped="0" failures="0" errors="0" timestamp="2025-12-15T23:52:07.563Z" hostname="yuri-bueno" time="0.046">
+<testsuite name="com.testevr.testejava.venda.internal.application.dto.CriarVendaDtoTest" tests="24" skipped="0" failures="0" errors="0" timestamp="2025-12-16T13:20:36.461Z" hostname="yuri-bueno" time="0.034">
   <properties/>
   <testcase name="testGetValor()" classname="com.testevr.testejava.venda.internal.application.dto.CriarVendaDtoTest" time="0.001"/>
-  <testcase name="testValorComEscala()" classname="com.testevr.testejava.venda.internal.application.dto.CriarVendaDtoTest" time="0.001"/>
-  <testcase name="testNoArgsConstructor()" classname="com.testevr.testejava.venda.internal.application.dto.CriarVendaDtoTest" time="0.001"/>
+  <testcase name="testValorComEscala()" classname="com.testevr.testejava.venda.internal.application.dto.CriarVendaDtoTest" time="0.002"/>
+  <testcase name="testNoArgsConstructor()" classname="com.testevr.testejava.venda.internal.application.dto.CriarVendaDtoTest" time="0.002"/>
   <testcase name="testValorPrecisao()" classname="com.testevr.testejava.venda.internal.application.dto.CriarVendaDtoTest" time="0.001"/>
-  <testcase name="testGetClienteId()" classname="com.testevr.testejava.venda.internal.application.dto.CriarVendaDtoTest" time="0.001"/>
-  <testcase name="testGetQuantidade()" classname="com.testevr.testejava.venda.internal.application.dto.CriarVendaDtoTest" time="0.001"/>
+  <testcase name="testGetClienteId()" classname="com.testevr.testejava.venda.internal.application.dto.CriarVendaDtoTest" time="0.0"/>
+  <testcase name="testGetQuantidade()" classname="com.testevr.testejava.venda.internal.application.dto.CriarVendaDtoTest" time="0.0"/>
   <testcase name="testSettersAndGetters()" classname="com.testevr.testejava.venda.internal.application.dto.CriarVendaDtoTest" time="0.001"/>
-  <testcase name="testGetProdutoId()" classname="com.testevr.testejava.venda.internal.application.dto.CriarVendaDtoTest" time="0.001"/>
+  <testcase name="testGetProdutoId()" classname="com.testevr.testejava.venda.internal.application.dto.CriarVendaDtoTest" time="0.002"/>
   <testcase name="testMultipleInstances()" classname="com.testevr.testejava.venda.internal.application.dto.CriarVendaDtoTest" time="0.001"/>
   <testcase name="testSetQuantidade()" classname="com.testevr.testejava.venda.internal.application.dto.CriarVendaDtoTest" time="0.001"/>
   <testcase name="testUpdateValues()" classname="com.testevr.testejava.venda.internal.application.dto.CriarVendaDtoTest" time="0.001"/>
-  <testcase name="testIdsGrandes()" classname="com.testevr.testejava.venda.internal.application.dto.CriarVendaDtoTest" time="0.001"/>
-  <testcase name="testNegativeQuantidade()" classname="com.testevr.testejava.venda.internal.application.dto.CriarVendaDtoTest" time="0.0"/>
-  <testcase name="testAllArgsConstructor()" classname="com.testevr.testejava.venda.internal.application.dto.CriarVendaDtoTest" time="0.002"/>
+  <testcase name="testIdsGrandes()" classname="com.testevr.testejava.venda.internal.application.dto.CriarVendaDtoTest" time="0.0"/>
+  <testcase name="testNegativeQuantidade()" classname="com.testevr.testejava.venda.internal.application.dto.CriarVendaDtoTest" time="0.001"/>
+  <testcase name="testAllArgsConstructor()" classname="com.testevr.testejava.venda.internal.application.dto.CriarVendaDtoTest" time="0.001"/>
   <testcase name="testZeroValor()" classname="com.testevr.testejava.venda.internal.application.dto.CriarVendaDtoTest" time="0.001"/>
   <testcase name="testSetClienteId()" classname="com.testevr.testejava.venda.internal.application.dto.CriarVendaDtoTest" time="0.001"/>
   <testcase name="testNegativeValor()" classname="com.testevr.testejava.venda.internal.application.dto.CriarVendaDtoTest" time="0.001"/>
-  <testcase name="testNullValues()" classname="com.testevr.testejava.venda.internal.application.dto.CriarVendaDtoTest" time="0.001"/>
-  <testcase name="testLargeValor()" classname="com.testevr.testejava.venda.internal.application.dto.CriarVendaDtoTest" time="0.003"/>
-  <testcase name="testSetProdutoId()" classname="com.testevr.testejava.venda.internal.application.dto.CriarVendaDtoTest" time="0.001"/>
+  <testcase name="testNullValues()" classname="com.testevr.testejava.venda.internal.application.dto.CriarVendaDtoTest" time="0.0"/>
+  <testcase name="testLargeValor()" classname="com.testevr.testejava.venda.internal.application.dto.CriarVendaDtoTest" time="0.0"/>
+  <testcase name="testSetProdutoId()" classname="com.testevr.testejava.venda.internal.application.dto.CriarVendaDtoTest" time="0.0"/>
   <testcase name="testZeroQuantidade()" classname="com.testevr.testejava.venda.internal.application.dto.CriarVendaDtoTest" time="0.001"/>
-  <testcase name="testIdsNegativos()" classname="com.testevr.testejava.venda.internal.application.dto.CriarVendaDtoTest" time="0.001"/>
+  <testcase name="testIdsNegativos()" classname="com.testevr.testejava.venda.internal.application.dto.CriarVendaDtoTest" time="0.0"/>
   <testcase name="testLargeQuantidade()" classname="com.testevr.testejava.venda.internal.application.dto.CriarVendaDtoTest" time="0.001"/>
-  <testcase name="testSetValor()" classname="com.testevr.testejava.venda.internal.application.dto.CriarVendaDtoTest" time="0.001"/>
+  <testcase name="testSetValor()" classname="com.testevr.testejava.venda.internal.application.dto.CriarVendaDtoTest" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

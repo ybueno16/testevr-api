@@ -54,23 +54,4 @@ public class ClienteMapper {
                 entity.getUpdatedAt()
         );
     }
-    public Cliente mapRow(ResultSet rs) throws SQLException {
-        Long id = rs.getLong("id");
-        String nome = rs.getString("nome");
-        String razaoSocial = rs.getString("razao_social");
-        String nomeFantasia = rs.getString("nome_fantasia");
-        String cnpj = rs.getString("cnpj");
-        boolean ativo = rs.getBoolean("ativo");
-
-        return new Cliente(
-                id,
-                new Nome(nome),
-                new RazaoSocial(razaoSocial),
-                new NomeFantasia(nomeFantasia),
-                new Cnpj(cnpj),
-                ativo
-        );
-    }
-
-
 }

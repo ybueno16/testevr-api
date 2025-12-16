@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.testevr.testejava.venda.external.application.dto.BaixaEstoqueResponseTest" tests="16" skipped="0" failures="0" errors="0" timestamp="2025-12-15T23:52:07.345Z" hostname="yuri-bueno" time="0.059">
+<testsuite name="com.testevr.testejava.venda.external.application.dto.BaixaEstoqueResponseTest" tests="16" skipped="0" failures="0" errors="0" timestamp="2025-12-16T13:20:36.025Z" hostname="yuri-bueno" time="0.029">
   <properties/>
-  <testcase name="testLargeValues()" classname="com.testevr.testejava.venda.external.application.dto.BaixaEstoqueResponseTest" time="0.002"/>
+  <testcase name="testLargeValues()" classname="com.testevr.testejava.venda.external.application.dto.BaixaEstoqueResponseTest" time="0.001"/>
   <testcase name="testZeroValues()" classname="com.testevr.testejava.venda.external.application.dto.BaixaEstoqueResponseTest" time="0.001"/>
-  <testcase name="testSetQuantidadeSolicitada()" classname="com.testevr.testejava.venda.external.application.dto.BaixaEstoqueResponseTest" time="0.001"/>
-  <testcase name="testSetMessage()" classname="com.testevr.testejava.venda.external.application.dto.BaixaEstoqueResponseTest" time="0.005"/>
-  <testcase name="testNoArgsConstructor()" classname="com.testevr.testejava.venda.external.application.dto.BaixaEstoqueResponseTest" time="0.002"/>
-  <testcase name="testSettersAndGetters()" classname="com.testevr.testejava.venda.external.application.dto.BaixaEstoqueResponseTest" time="0.003"/>
-  <testcase name="testGetEstoqueAtual()" classname="com.testevr.testejava.venda.external.application.dto.BaixaEstoqueResponseTest" time="0.007"/>
-  <testcase name="testMultipleInstances()" classname="com.testevr.testejava.venda.external.application.dto.BaixaEstoqueResponseTest" time="0.004"/>
-  <testcase name="testUpdateValues()" classname="com.testevr.testejava.venda.external.application.dto.BaixaEstoqueResponseTest" time="0.003"/>
-  <testcase name="testSetEstoqueAtual()" classname="com.testevr.testejava.venda.external.application.dto.BaixaEstoqueResponseTest" time="0.002"/>
-  <testcase name="testGetQuantidadeSolicitada()" classname="com.testevr.testejava.venda.external.application.dto.BaixaEstoqueResponseTest" time="0.002"/>
-  <testcase name="testConstructorWithMessage()" classname="com.testevr.testejava.venda.external.application.dto.BaixaEstoqueResponseTest" time="0.004"/>
-  <testcase name="testNegativeValues()" classname="com.testevr.testejava.venda.external.application.dto.BaixaEstoqueResponseTest" time="0.002"/>
-  <testcase name="testGetMessage()" classname="com.testevr.testejava.venda.external.application.dto.BaixaEstoqueResponseTest" time="0.002"/>
-  <testcase name="testNullValues()" classname="com.testevr.testejava.venda.external.application.dto.BaixaEstoqueResponseTest" time="0.001"/>
+  <testcase name="testSetQuantidadeSolicitada()" classname="com.testevr.testejava.venda.external.application.dto.BaixaEstoqueResponseTest" time="0.003"/>
+  <testcase name="testSetMessage()" classname="com.testevr.testejava.venda.external.application.dto.BaixaEstoqueResponseTest" time="0.001"/>
+  <testcase name="testNoArgsConstructor()" classname="com.testevr.testejava.venda.external.application.dto.BaixaEstoqueResponseTest" time="0.001"/>
+  <testcase name="testSettersAndGetters()" classname="com.testevr.testejava.venda.external.application.dto.BaixaEstoqueResponseTest" time="0.001"/>
+  <testcase name="testGetEstoqueAtual()" classname="com.testevr.testejava.venda.external.application.dto.BaixaEstoqueResponseTest" time="0.001"/>
+  <testcase name="testMultipleInstances()" classname="com.testevr.testejava.venda.external.application.dto.BaixaEstoqueResponseTest" time="0.001"/>
+  <testcase name="testUpdateValues()" classname="com.testevr.testejava.venda.external.application.dto.BaixaEstoqueResponseTest" time="0.002"/>
+  <testcase name="testSetEstoqueAtual()" classname="com.testevr.testejava.venda.external.application.dto.BaixaEstoqueResponseTest" time="0.001"/>
+  <testcase name="testGetQuantidadeSolicitada()" classname="com.testevr.testejava.venda.external.application.dto.BaixaEstoqueResponseTest" time="0.001"/>
+  <testcase name="testConstructorWithMessage()" classname="com.testevr.testejava.venda.external.application.dto.BaixaEstoqueResponseTest" time="0.001"/>
+  <testcase name="testNegativeValues()" classname="com.testevr.testejava.venda.external.application.dto.BaixaEstoqueResponseTest" time="0.001"/>
+  <testcase name="testGetMessage()" classname="com.testevr.testejava.venda.external.application.dto.BaixaEstoqueResponseTest" time="0.001"/>
+  <testcase name="testNullValues()" classname="com.testevr.testejava.venda.external.application.dto.BaixaEstoqueResponseTest" time="0.002"/>
   <testcase name="testEmptyMessage()" classname="com.testevr.testejava.venda.external.application.dto.BaixaEstoqueResponseTest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>

@@ -1,5 +1,6 @@
 package com.testevr.testejava.cliente.infra.persistence.repository;
 
+import com.testevr.testejava.cliente.application.mapper.ClienteMapper;
 import com.testevr.testejava.cliente.domain.entity.Cliente;
 import com.testevr.testejava.cliente.domain.repository.ClienteRepository;
 import com.testevr.testejava.cliente.domain.valueobject.Nome;

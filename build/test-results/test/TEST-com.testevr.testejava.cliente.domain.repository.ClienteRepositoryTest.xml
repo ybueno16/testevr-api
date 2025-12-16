@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.testevr.testejava.cliente.domain.repository.ClienteRepositoryTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2025-12-15T23:52:06.019Z" hostname="yuri-bueno" time="0.054">
+<testsuite name="com.testevr.testejava.cliente.domain.repository.ClienteRepositoryTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2025-12-16T13:20:32.769Z" hostname="yuri-bueno" time="0.611">
   <properties/>
-  <testcase name="testFindAllEmpty()" classname="com.testevr.testejava.cliente.domain.repository.ClienteRepositoryTest" time="0.031"/>
-  <testcase name="testFindAll()" classname="com.testevr.testejava.cliente.domain.repository.ClienteRepositoryTest" time="0.002"/>
-  <testcase name="testUpdateNull()" classname="com.testevr.testejava.cliente.domain.repository.ClienteRepositoryTest" time="0.002"/>
+  <testcase name="testFindAllEmpty()" classname="com.testevr.testejava.cliente.domain.repository.ClienteRepositoryTest" time="0.524"/>
+  <testcase name="testFindAll()" classname="com.testevr.testejava.cliente.domain.repository.ClienteRepositoryTest" time="0.007"/>
+  <testcase name="testUpdateNull()" classname="com.testevr.testejava.cliente.domain.repository.ClienteRepositoryTest" time="0.007"/>
   <testcase name="testFindById()" classname="com.testevr.testejava.cliente.domain.repository.ClienteRepositoryTest" time="0.004"/>
-  <testcase name="testFindByIdNotFound()" classname="com.testevr.testejava.cliente.domain.repository.ClienteRepositoryTest" time="0.002"/>
+  <testcase name="testFindByIdNotFound()" classname="com.testevr.testejava.cliente.domain.repository.ClienteRepositoryTest" time="0.003"/>
   <testcase name="testCreateNull()" classname="com.testevr.testejava.cliente.domain.repository.ClienteRepositoryTest" time="0.003"/>
   <testcase name="testCreate()" classname="com.testevr.testejava.cliente.domain.repository.ClienteRepositoryTest" time="0.003"/>
-  <testcase name="testDelete()" classname="com.testevr.testejava.cliente.domain.repository.ClienteRepositoryTest" time="0.001"/>
-  <testcase name="testDeleteMultiple()" classname="com.testevr.testejava.cliente.domain.repository.ClienteRepositoryTest" time="0.002"/>
-  <testcase name="testUpdate()" classname="com.testevr.testejava.cliente.domain.repository.ClienteRepositoryTest" time="0.002"/>
+  <testcase name="testDelete()" classname="com.testevr.testejava.cliente.domain.repository.ClienteRepositoryTest" time="0.034"/>
+  <testcase name="testDeleteMultiple()" classname="com.testevr.testejava.cliente.domain.repository.ClienteRepositoryTest" time="0.008"/>
+  <testcase name="testUpdate()" classname="com.testevr.testejava.cliente.domain.repository.ClienteRepositoryTest" time="0.003"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

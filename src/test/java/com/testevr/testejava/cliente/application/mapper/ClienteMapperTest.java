@@ -11,8 +11,6 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 class ClienteMapperTest {
     @Test
@@ -25,23 +23,6 @@ class ClienteMapperTest {
         assertNull(mapper.toDto(null));
     }
 
-    @Test
-    void testMapRow() throws Exception {
-        java.sql.ResultSet rs = mock(java.sql.ResultSet.class);
-        when(rs.getLong("id")).thenReturn(1L);
-        when(rs.getString("nome")).thenReturn("Nome");
-        when(rs.getString("razao_social")).thenReturn("Razao");
-        when(rs.getString("nome_fantasia")).thenReturn("Fantasia");
-        when(rs.getString("cnpj")).thenReturn("69423022000160");
-        when(rs.getBoolean("ativo")).thenReturn(true);
-        Cliente entity = mapper.mapRow(rs);
-        assertNotNull(entity);
-        assertEquals("Nome", entity.getNome().getValue());
-        assertEquals("Razao", entity.getRazaoSocial().getValue());
-        assertEquals("Fantasia", entity.getNomeFantasia().getValue());
-        assertEquals("69423022000160", entity.getCnpj().getValue());
-        assertTrue(entity.isAtivo());
-    }
     private final ClienteMapper mapper = new ClienteMapper();
 
     @Test
